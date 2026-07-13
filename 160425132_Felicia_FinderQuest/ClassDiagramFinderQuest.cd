@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="_160425132_Felicia_FinderQuest.Players">
+    <Position X="1.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAggAAAAIAAAAgAAAAIAAQAAAAEAAAJQAAAAIAAAAA=</HashCode>
+      <FileName>Players.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="playTime" />
+      <Property Name="PlayTime" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_160425132_Felicia_FinderQuest.Time">
+    <Position X="3.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAgAAAAMAAAAAASIAAAAiAAAAAAA=</HashCode>
+      <FileName>Time.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_160425132_Felicia_FinderQuest.Persons">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAggACIAIAAIAAAACBCAAQAAAAUAAAAEAgAAAAAAAA=</HashCode>
+      <FileName>Persons.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PersonQuestion" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_160425132_Felicia_FinderQuest.Questions">
+    <Position X="9" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAIAAAAAAQAAAAEAAAAAgAAAAI=</HashCode>
+      <FileName>Questions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_160425132_Felicia_FinderQuest.Areas">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAgAAAAIAA=</HashCode>
+      <FileName>Areas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_160425132_Felicia_FinderQuest.WalkAreas">
+    <Position X="12" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAgCBAAAAAAAAAAAAAAAABAAACgAAAIAAAAAAAAAFA=</HashCode>
+      <FileName>WalkAreas.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="LstPersons" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="_160425132_Felicia_FinderQuest.TalkAreas">
+    <Position X="15.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>TalkAreas.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Person" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_160425132_Felicia_FinderQuest.Entity">
+    <Position X="3" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAIAAIAAAACAAACAAAAAAAAgAAAAIAAAAAAA=</HashCode>
+      <FileName>Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

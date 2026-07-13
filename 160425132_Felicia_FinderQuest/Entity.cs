@@ -1,0 +1,95 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Xml.Linq;
+using WMPLib;
+
+namespace _160425132_Felicia_FinderQuest
+{
+	public class Entity
+	{
+		#region data member
+		private PictureBox idle;
+		private PictureBox jumpscare;
+		private WindowsMediaPlayer soundComing;
+		private WindowsMediaPlayer soundNearby;
+		private WindowsMediaPlayer soundJumpscare;
+		#endregion
+
+		#region constructor
+		public Entity(string soundpath1, string soundpath2, string soundpath3, Image image1, Size size1, Point location1, Image image2, Size size2, Point location2)
+		{
+			this.Idle = new PictureBox();
+			this.Idle.Image = image1;
+			this.Idle.Size = size1;
+			this.Idle.Location = location1;
+			this.Jumpscare = new PictureBox();
+			this.Jumpscare.Image = image1;
+			this.Jumpscare.Size = size1;
+			this.Jumpscare.Location = location1;
+
+			this.SoundComing = new WindowsMediaPlayer();
+			this.SoundNearby = new WindowsMediaPlayer();
+			this.SoundJumpscare = new WindowsMediaPlayer();
+			this.SoundComing.URL = Application.StartupPath + soundpath1;
+			this.SoundNearby.URL = Application.StartupPath + soundpath2;
+			this.SoundJumpscare.URL = Application.StartupPath + soundpath3;
+		}
+		#endregion
+
+		#region properti
+		public PictureBox Idle { get => idle; set => idle= value; }
+		public WindowsMediaPlayer SoundComing { get => soundComing; set => soundComing = value; }
+		public WindowsMediaPlayer SoundNearby { get => soundNearby; set => soundNearby = value; }
+		public WindowsMediaPlayer SoundJumpscare { get => soundJumpscare; set => soundJumpscare = value; }
+		public PictureBox Jumpscare { get => jumpscare; set => jumpscare = value; }
+		#endregion
+
+		#region method
+		public void DisplayEntity(Control container)
+		{
+			this.Idle.Parent = container;
+			this.Idle.SizeMode = PictureBoxSizeMode.StretchImage;
+			this.Idle.BackColor = Color.Transparent;
+			this.Idle.BringToFront();
+		}
+		public void DisplayJumpscare(Control container)
+		{
+			this.Idle.Parent = container;
+			this.Idle.SizeMode = PictureBoxSizeMode.StretchImage;
+			this.Idle.BackColor = Color.Transparent;
+			this.Idle.BringToFront();
+
+			this.PlaySound("jumpscare");
+		}
+
+		public void PlaySound(string type)
+		{
+			if (type == "nearby")
+			{
+				this.SoundNearby.controls.play();
+			}
+			else if (type == "coming")
+			{
+				this.SoundComing.controls.play();
+
+			}
+			else if (type == "jumpscare")
+			{
+				this.SoundJumpscare.controls.play();
+			}
+		}
+		#endregion
+
+	}
+}
+
+//backSoundPlayer.URL = Application.StartupPath + "\\sound\\BacksoundWalkArea.mp3";
+//backSoundPlayer.settings.setMode("loop", true);
+//otherSoundPlayer.controls.play();
+
+//Properties.Resources.person1, new Size(60, 90), new Point(150, 350)
