@@ -7,6 +7,8 @@ namespace _160425132_Felicia_FinderQuest // add existing file (klik kanan spt ma
 {
     public class Time
     {
+        // FEFE DUARR
+
         private int hour;
         private int minute;
         private int second;
