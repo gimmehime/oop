@@ -93,9 +93,9 @@ namespace _160425132_Felicia_FinderQuest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EntityPlaceHolder {
+        internal static System.Drawing.Bitmap BgA200 {
             get {
-                object obj = ResourceManager.GetObject("EntityPlaceHolder", resourceCulture);
+                object obj = ResourceManager.GetObject("BgA200", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,29 @@ namespace _160425132_Felicia_FinderQuest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JumpscarePlaceHolder {
+        internal static System.Drawing.Bitmap Idle {
             get {
-                object obj = ResourceManager.GetObject("JumpscarePlaceHolder", resourceCulture);
+                object obj = ResourceManager.GetObject("Idle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Jumpscare {
+            get {
+                object obj = ResourceManager.GetObject("Jumpscare", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Mechanism {
+            get {
+                object obj = ResourceManager.GetObject("Mechanism", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -286,6 +306,16 @@ namespace _160425132_Felicia_FinderQuest.Properties {
         internal static System.Drawing.Bitmap talkArea7 {
             get {
                 object obj = ResourceManager.GetObject("talkArea7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tangan {
+            get {
+                object obj = ResourceManager.GetObject("Tangan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

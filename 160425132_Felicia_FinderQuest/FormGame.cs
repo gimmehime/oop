@@ -33,10 +33,10 @@ namespace _160425132_Felicia_FinderQuest
         bool enterTalkArea = false;
         bool paused = false;
 
-        WindowsMediaPlayer backSoundPlayer = new WindowsMediaPlayer();  //bgm, nge loop terus
-        WindowsMediaPlayer otherSoundPlayer;  //suara win/lose
+        public WindowsMediaPlayer backSoundPlayer = new WindowsMediaPlayer();  //bgm
+		public WindowsMediaPlayer otherSoundPlayer;
 
-        private void FormGame_Load(object sender, EventArgs e) // Panel game and area di hide, play pause di disable, timer interval jd 1 dtk
+        private void FormGame_Load(object sender, EventArgs e)
         {
             panelGame.Visible = false;
             labelTime.Visible = false;
@@ -175,10 +175,10 @@ namespace _160425132_Felicia_FinderQuest
 					player.DisplayPicture(this);  // utk menampilkan player pada form
 			}
         }
-		#endregion
+        #endregion
 
-		#region METHODS
-		private void GameOver()
+        #region METHOD (Start & Game Over)
+        private void GameOver()
         {
             timerTime.Stop();
 
@@ -214,49 +214,49 @@ namespace _160425132_Felicia_FinderQuest
 
             paused = false;
             playPauseToolStripMenuItem.Text = "Pause Game";
+			this.Focus();
         }
+        #endregion
 
-		
-		private void GenerateWalkArea()  
-        {
-            if (currentWalkArea == null)
-            {
-                currentWalkArea = new WalkAreas("The Barn", Properties.Resources.walkArea1, 1);
+        #region METHODS (Generate Area)
+        private void GenerateWalkArea()
+		{
+			if (currentWalkArea == null)
+			{
+				currentWalkArea = new WalkAreas("The Barn", Properties.Resources.walkArea1, 1);
 
-                currentWalkArea.AddPerson(1, "Anna", Properties.Resources.person1, new Size(60, 90), new Point(150, 350), "I have a question for you. Are you ready?\nPress 'y' to continue");
-                currentWalkArea.AddPerson(2, "Andy", Properties.Resources.person2, new Size(60, 90), new Point(420, 350), "Can you answer my question? Let's go!\nPress 'y' to continue");
-                currentWalkArea.AddPerson(3, "Bobby", Properties.Resources.person3, new Size(60, 90), new Point(600, 360), "Just answer my question please..\nPress 'y' to continue");
-            }
-            else if (currentWalkArea.NoArea == 2)
-            {
-                // hapus smua person di area sblmnya
-                currentWalkArea.RemoveAllPersons();
-                currentWalkArea = new WalkAreas("The Field", Properties.Resources.walkArea2, 2);
+				currentWalkArea.AddPerson(1, "Anna", Properties.Resources.person1, new Size(60, 90), new Point(150, 350), "I have a question for you. Are you ready?\nPress 'y' to continue");
+				currentWalkArea.AddPerson(2, "Andy", Properties.Resources.person2, new Size(60, 90), new Point(420, 350), "Can you answer my question? Let's go!\nPress 'y' to continue");
+				currentWalkArea.AddPerson(3, "Bobby", Properties.Resources.person3, new Size(60, 90), new Point(600, 360), "Just answer my question please..\nPress 'y' to continue");
+			}
+			else if (currentWalkArea.NoArea == 2)
+			{
+				// hapus smua person di area sblmnya
+				currentWalkArea.RemoveAllPersons();
+				currentWalkArea = new WalkAreas("The Field", Properties.Resources.walkArea2, 2);
 
-                currentWalkArea.AddPerson(4, "Rina", Properties.Resources.person4, new Size(60, 90), new Point(100, 300), "I'm sure you can answer my question\nPress 'y' to continue");
-                currentWalkArea.AddPerson(5, "Tommy", Properties.Resources.person5, new Size(60, 90), new Point(450, 350), "You look so smart. Can you answer this?\nPress 'y' to continue");
-            }
-            else if (currentWalkArea.NoArea == 3)
-            {
-                currentWalkArea.RemoveAllPersons();
-                currentWalkArea = new WalkAreas("The Farm", Properties.Resources.walkArea3, 3);
+				currentWalkArea.AddPerson(4, "Rina", Properties.Resources.person4, new Size(60, 90), new Point(100, 300), "I'm sure you can answer my question\nPress 'y' to continue");
+				currentWalkArea.AddPerson(5, "Tommy", Properties.Resources.person5, new Size(60, 90), new Point(450, 350), "You look so smart. Can you answer this?\nPress 'y' to continue");
+			}
+			else if (currentWalkArea.NoArea == 3)
+			{
+				currentWalkArea.RemoveAllPersons();
+				currentWalkArea = new WalkAreas("The Farm", Properties.Resources.walkArea3, 3);
 
-                currentWalkArea.AddPerson(6, "Marie", Properties.Resources.person6, new Size(60, 90), new Point(120, 380), "Answer my question carefully.. \nPress 'y' to continue");
-                currentWalkArea.AddPerson(7, "Luke", Properties.Resources.person7, new Size(60, 90), new Point(470, 380), "I have a question for you.\nPress 'y' to continue");
-            }
+				currentWalkArea.AddPerson(6, "Marie", Properties.Resources.person6, new Size(60, 90), new Point(120, 380), "Answer my question carefully.. \nPress 'y' to continue");
+				currentWalkArea.AddPerson(7, "Luke", Properties.Resources.person7, new Size(60, 90), new Point(470, 380), "I have a question for you.\nPress 'y' to continue");
+			}
 
-            currentWalkArea.DisplayPicture(this); // tampilin gambar walk area
-            currentWalkArea.DisplayPersons(this); // tampilin person di lstPerson
-            labelArea.Text = currentWalkArea.DisplayData();
+			currentWalkArea.DisplayPicture(this); // tampilin gambar walk area
+			currentWalkArea.DisplayPersons(this); // tampilin person di lstPerson
+			labelArea.Text = currentWalkArea.DisplayData();
 
-            if (player != null)
-            {
-                player.Picture.Location = new Point(0, player.Picture.Location.Y);
-            }
-        }
-		#endregion
+			if (player != null)
+			{
+				player.Picture.Location = new Point(0, player.Picture.Location.Y);
+			}
+		}
 
-		#region METHODS 2
 		private void GenerateTalkArea() // cek dulu person mana yg sekarang sedang menyentuh player, then make a talk area dgn person tsb. Active person juga dikasih question sesuai noPerson yg disentuh
         {
             if (activePerson.NoPerson == 1)
@@ -303,66 +303,95 @@ namespace _160425132_Felicia_FinderQuest
 				activePerson.AddQuestion("What is the 1st principle (sila ke - 1) of Pancasila ?", "Ketuhanan Yang Maha Esa", 150);
 			}
 		}
+		#endregion
 
-        public void EnterTalkArea()
-        {
-            GenerateTalkArea();
+		#region METHODS (Others)
+		public void EnterTalkArea()
+		{
+			GenerateTalkArea();
 
-            player.Picture.Visible = false;
+			player.Picture.Visible = false;
 
-            panelTalkArea.BackgroundImage = currentTalkArea.Background;
-            panelTalkArea.Visible = true;
-            panelTalkArea.BringToFront();
+			panelTalkArea.BackgroundImage = currentTalkArea.Background;
+			panelTalkArea.Visible = true;
+			panelTalkArea.BringToFront();
 
-            activePerson.Picture.Size = new Size(200, 300);
-            activePerson.Picture.Location = new Point(300, 100);
-            activePerson.DisplayPicture(panelTalkArea);
+			activePerson.Picture.Size = new Size(200, 300);
+			activePerson.Picture.Location = new Point(300, 100);
+			activePerson.DisplayPicture(panelTalkArea);
 
-            if (activePerson.SolvedStatus == true)
-            {
-                activePerson.Dialog = "Congratulation! \nYou have answered my question.";
-            }
+			if (activePerson.SolvedStatus == true)
+			{
+				activePerson.Dialog = "Congratulation! \nYou have answered my question.";
+			}
 
-            activePerson.DisplayDialog(panelTalkArea);
-            PlaySound("talk area");
-        }
+			activePerson.DisplayDialog(panelTalkArea);
+			PlaySound("talk area");
+		}
 
-        public void ExitTalkArea()
-        {
-            player.Picture.Visible = true;
-            enterTalkArea = false;
+		public void ExitTalkArea()
+		{
+			player.Picture.Visible = true;
+			enterTalkArea = false;
 
-            panelTalkArea.Visible = false;
-            activePerson.Picture.Size = new Size(60, 90);
-            activePerson.Picture.Location = activePersonLastLocation;
-            activePerson.DisplayPicture(this);
-            PlaySound("walk area");
+			panelTalkArea.Visible = false;
+			activePerson.Picture.Size = new Size(60, 90);
+			activePerson.Picture.Location = activePersonLastLocation;
+			activePerson.DisplayPicture(this);
+			PlaySound("walk area");
 		}
 
 		private void PlaySound(string type)
-        {
-            otherSoundPlayer = new WindowsMediaPlayer();
-            if (type == "walk area")
-            {
-                backSoundPlayer.URL = Application.StartupPath + "\\sound\\BacksoundWalkArea.mp3";
-                backSoundPlayer.settings.setMode("loop", true);
+		{
+			otherSoundPlayer = new WindowsMediaPlayer();
+			if (type == "walk area")
+			{
+				backSoundPlayer.URL = Application.StartupPath + "\\sound\\BacksoundWalkArea.mp3";
+				backSoundPlayer.settings.setMode("loop", true);
 			}
-            else if (type == "talk area")
-            {
-                backSoundPlayer.URL = Application.StartupPath + "\\sound\\BacksoundTalkArea.mp3";
-                backSoundPlayer.settings.setMode("loop", true);
+			else if (type == "talk area")
+			{
+				backSoundPlayer.URL = Application.StartupPath + "\\sound\\BacksoundTalkArea.mp3";
+				backSoundPlayer.settings.setMode("loop", true);
 			}
-            else if (type == "lose game")
-            {
-                otherSoundPlayer.URL = Application.StartupPath + "\\sound\\LoseGame.mp3";
+			else if (type == "lose game")
+			{
+				otherSoundPlayer.URL = Application.StartupPath + "\\sound\\LoseGame.mp3";
 			}
-            else if (type == "win game")
-            {
-                otherSoundPlayer.URL = Application.StartupPath + "\\sound\\WinGame.mp3";
+			else if (type == "win game")
+			{
+				otherSoundPlayer.URL = Application.StartupPath + "\\sound\\WinGame.mp3";
 			}
-            otherSoundPlayer.controls.play();
+			otherSoundPlayer.controls.play();
 		}
 		#endregion
+
+
+		FormA200 formA200;
+		public void KirimForm(FormA200 frm)
+		{
+			this.formA200 = frm;
+		}
+
+		private void FormGame_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (e.CloseReason == CloseReason.UserClosing)
+			{
+				e.Cancel = true;
+				this.Hide();
+				formA200.Show();
+				formA200.bgm.controls.play();
+				backSoundPlayer.controls.pause();
+				if (otherSoundPlayer != null)
+					otherSoundPlayer.controls.pause();
+				//formA200.currentForm = "game";
+			}
+		}
+
+		private void labelBackToRoom_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 	}
 }
 

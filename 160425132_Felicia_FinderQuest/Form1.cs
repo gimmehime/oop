@@ -40,12 +40,12 @@ namespace _160425132_Felicia_FinderQuest
 			}
 		}
 
-		FormOffice f2;
+		FormA200 f2;
 		private void BukaMainMenu()
 		{
 			MessageBox.Show("Masuk ke gamee");
 			this.Hide();
-			f2 = new FormOffice();
+			f2 = new FormA200();
 			f2.Show();
 		}
 

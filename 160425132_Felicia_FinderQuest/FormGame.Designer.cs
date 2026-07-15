@@ -37,10 +37,11 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.timerTime = new System.Windows.Forms.Timer(this.components);
 			this.panelGame = new System.Windows.Forms.Panel();
-			this.panelTalkArea = new System.Windows.Forms.Panel();
 			this.labelPlayer = new System.Windows.Forms.Label();
 			this.labelTime = new System.Windows.Forms.Label();
 			this.labelArea = new System.Windows.Forms.Label();
+			this.panelTalkArea = new System.Windows.Forms.Panel();
+			this.labelBackToRoom = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			this.panelGame.SuspendLayout();
 			this.SuspendLayout();
@@ -118,17 +119,6 @@
 			this.panelGame.Size = new System.Drawing.Size(1100, 90);
 			this.panelGame.TabIndex = 1;
 			// 
-			// panelTalkArea
-			// 
-			this.panelTalkArea.BackColor = System.Drawing.Color.Transparent;
-			this.panelTalkArea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.panelTalkArea.Location = new System.Drawing.Point(0, 125);
-			this.panelTalkArea.Margin = new System.Windows.Forms.Padding(4);
-			this.panelTalkArea.Name = "panelTalkArea";
-			this.panelTalkArea.Size = new System.Drawing.Size(1100, 441);
-			this.panelTalkArea.TabIndex = 2;
-			this.panelTalkArea.Visible = false;
-			// 
 			// labelPlayer
 			// 
 			this.labelPlayer.AutoSize = true;
@@ -165,14 +155,39 @@
 			this.labelArea.TabIndex = 0;
 			this.labelArea.Text = "labelArea";
 			// 
+			// panelTalkArea
+			// 
+			this.panelTalkArea.BackColor = System.Drawing.Color.Transparent;
+			this.panelTalkArea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.panelTalkArea.Location = new System.Drawing.Point(0, 125);
+			this.panelTalkArea.Margin = new System.Windows.Forms.Padding(4);
+			this.panelTalkArea.Name = "panelTalkArea";
+			this.panelTalkArea.Size = new System.Drawing.Size(1100, 441);
+			this.panelTalkArea.TabIndex = 2;
+			this.panelTalkArea.Visible = false;
+			// 
+			// labelBackToRoom
+			// 
+			this.labelBackToRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.labelBackToRoom.Font = new System.Drawing.Font("Perpetua Titling MT", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelBackToRoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.labelBackToRoom.Location = new System.Drawing.Point(793, 581);
+			this.labelBackToRoom.Name = "labelBackToRoom";
+			this.labelBackToRoom.Size = new System.Drawing.Size(293, 60);
+			this.labelBackToRoom.TabIndex = 0;
+			this.labelBackToRoom.Text = "BACK";
+			this.labelBackToRoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelBackToRoom.Click += new System.EventHandler(this.labelBackToRoom_Click);
+			// 
 			// FormGame
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = global::_160425132_Felicia_FinderQuest.Properties.Resources.background;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(1100, 563);
+			this.ClientSize = new System.Drawing.Size(1100, 653);
 			this.Controls.Add(this.panelTalkArea);
+			this.Controls.Add(this.labelBackToRoom);
 			this.Controls.Add(this.panelGame);
 			this.Controls.Add(this.menuStrip1);
 			this.DoubleBuffered = true;
@@ -181,6 +196,7 @@
 			this.Name = "FormGame";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Finder Quest Game";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormGame_FormClosing);
 			this.Load += new System.EventHandler(this.FormGame_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyDown);
 			this.menuStrip1.ResumeLayout(false);
@@ -206,6 +222,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		public System.Windows.Forms.Label labelPlayer;
+		private System.Windows.Forms.Label labelBackToRoom;
 	}
 }
 

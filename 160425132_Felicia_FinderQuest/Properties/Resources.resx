@@ -190,10 +190,19 @@
   <data name="background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EntityPlaceHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\EntityPlaceHolder.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Mechanism" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Mechanism.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="JumpscarePlaceHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\JumpscraePlaceHolder.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Idle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Idle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Jumpscare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Jumpscare.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BgA200" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\office2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tangan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tangan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using _160425132_Felicia_FinderQuest;
 
 namespace _160425132_Felicia_FinderQuest
 {
@@ -37,6 +38,38 @@ namespace _160425132_Felicia_FinderQuest
             }
             this.Close();
             frmGame.ExitTalkArea();
+		}
+
+
+
+		FormA200 formA200;
+		FormGame formGame = new FormGame();
+		public void KirimForm(FormA200 frm)
+		{
+			this.formA200 = frm;
+		}
+
+		public bool changeForm = false;
+		private void labelBackToRoom_Click(object sender, EventArgs e)
+		{
+			changeForm = true;
+            this.Close();
+		}
+
+		private void FormQuestion_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (e.CloseReason == CloseReason.UserClosing)
+			{
+				if (changeForm)
+				{
+					e.Cancel = true;
+					this.Hide();
+					formA200.Show();
+					formA200.bgm.controls.play();
+					formGame.backSoundPlayer.controls.pause();
+					//formA200.currentForm = "question";
+				}
+			}
 		}
 	}
 }

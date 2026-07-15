@@ -16,7 +16,7 @@ namespace _160425132_Felicia_FinderQuest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormOffice());
+            Application.Run(new FormA200());
         }
     }
 }

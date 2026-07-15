@@ -60,11 +60,11 @@
     <Compile Include="FormGame.Designer.cs">
       <DependentUpon>FormGame.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOffice.cs">
+    <Compile Include="FormA200.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOffice.Designer.cs">
-      <DependentUpon>FormOffice.cs</DependentUpon>
+    <Compile Include="FormA200.Designer.cs">
+      <DependentUpon>FormA200.cs</DependentUpon>
     </Compile>
     <Compile Include="FormQuestion.cs">
       <SubType>Form</SubType>
@@ -91,8 +91,8 @@
     <EmbeddedResource Include="FormGame.resx">
       <DependentUpon>FormGame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOffice.resx">
-      <DependentUpon>FormOffice.cs</DependentUpon>
+    <EmbeddedResource Include="FormA200.resx">
+      <DependentUpon>FormA200.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormQuestion.resx">
       <DependentUpon>FormQuestion.cs</DependentUpon>

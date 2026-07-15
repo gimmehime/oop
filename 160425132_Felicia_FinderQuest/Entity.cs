@@ -15,13 +15,15 @@ namespace _160425132_Felicia_FinderQuest
 		#region data member
 		private PictureBox idle;
 		private PictureBox jumpscare;
-		private WindowsMediaPlayer soundComing;
+		private WindowsMediaPlayer soundApproaching;
 		private WindowsMediaPlayer soundNearby;
 		private WindowsMediaPlayer soundJumpscare;
+		private WindowsMediaPlayer musicDepanPlayer;
+		private List<string> soundPath;
 		#endregion
 
 		#region constructor
-		public Entity(string soundpath1, string soundpath2, string soundpath3, Image image1, Size size1, Point location1, Image image2, Size size2, Point location2)
+		public Entity(string soundpath1, string soundpath2, string soundpath3, string soundpath4, Image image1, Size size1, Point location1, Image image2, Size size2, Point location2)
 		{
 			this.Idle = new PictureBox();
 			this.Idle.Image = image1;
@@ -32,21 +34,23 @@ namespace _160425132_Felicia_FinderQuest
 			this.Jumpscare.Size = size1;
 			this.Jumpscare.Location = location1;
 
-			this.SoundComing = new WindowsMediaPlayer();
+			this.SoundApproacing = new WindowsMediaPlayer();
 			this.SoundNearby = new WindowsMediaPlayer();
 			this.SoundJumpscare = new WindowsMediaPlayer();
-			this.SoundComing.URL = Application.StartupPath + soundpath1;
-			this.SoundNearby.URL = Application.StartupPath + soundpath2;
-			this.SoundJumpscare.URL = Application.StartupPath + soundpath3;
+			this.MusicDepanPlayer = new WindowsMediaPlayer();
+
+			this.SoundPath = new List<string> { soundpath1, soundpath2, soundpath3, soundpath4 };
 		}
 		#endregion
 
 		#region properti
-		public PictureBox Idle { get => idle; set => idle= value; }
-		public WindowsMediaPlayer SoundComing { get => soundComing; set => soundComing = value; }
+		public PictureBox Idle { get => idle; set => idle = value; }
+		public PictureBox Jumpscare { get => jumpscare; set => jumpscare = value; }
+		public WindowsMediaPlayer SoundApproacing { get => soundApproaching; set => soundApproaching = value; }
 		public WindowsMediaPlayer SoundNearby { get => soundNearby; set => soundNearby = value; }
 		public WindowsMediaPlayer SoundJumpscare { get => soundJumpscare; set => soundJumpscare = value; }
-		public PictureBox Jumpscare { get => jumpscare; set => jumpscare = value; }
+		public WindowsMediaPlayer MusicDepanPlayer { get => musicDepanPlayer; set => musicDepanPlayer = value; }
+		public List<string> SoundPath { get => soundPath; set => soundPath = value; }
 		#endregion
 
 		#region method
@@ -69,19 +73,31 @@ namespace _160425132_Felicia_FinderQuest
 
 		public void PlaySound(string type)
 		{
-			if (type == "nearby")
+			if (type == "approaching")
 			{
-				this.SoundNearby.controls.play();
+				this.SoundApproacing.URL = Application.StartupPath + this.SoundPath[0];
+				this.SoundApproacing.controls.play();
 			}
-			else if (type == "coming")
+			else if (type == "nearby")
 			{
-				this.SoundComing.controls.play();
-
+				this.SoundNearby.URL = Application.StartupPath + this.SoundPath[1];
+				this.SoundNearby.controls.play();
 			}
 			else if (type == "jumpscare")
 			{
+				this.SoundJumpscare.URL = Application.StartupPath + this.SoundPath[2];
 				this.SoundJumpscare.controls.play();
 			}
+			else if (type == "depanPlayer")
+			{
+				this.MusicDepanPlayer.URL = Application.StartupPath + this.SoundPath[3];
+				this.MusicDepanPlayer.settings.setMode("loop", true);
+			}
+		}
+
+		public void PauseSound()
+		{
+			this.MusicDepanPlayer.controls.stop();
 		}
 		#endregion
 
