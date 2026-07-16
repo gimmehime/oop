@@ -59,7 +59,7 @@ namespace _160425132_Felicia_FinderQuest
 			this.Idle.Parent = container;
 			this.Idle.SizeMode = PictureBoxSizeMode.StretchImage;
 			this.Idle.BackColor = Color.Transparent;
-			this.Idle.BringToFront();
+			this.Idle.Visible = true;
 		}
 		public void DisplayJumpscare(Control container)
 		{
@@ -69,6 +69,11 @@ namespace _160425132_Felicia_FinderQuest
 			this.Idle.BringToFront();
 
 			this.PlaySound("jumpscare");
+		}
+
+		public void HideEntity()
+		{
+			this.Idle.Visible = false;
 		}
 
 		public void PlaySound(string type)
@@ -91,7 +96,7 @@ namespace _160425132_Felicia_FinderQuest
 			else if (type == "depanPlayer")
 			{
 				this.MusicDepanPlayer.URL = Application.StartupPath + this.SoundPath[3];
-				this.MusicDepanPlayer.settings.setMode("loop", true);
+				this.MusicDepanPlayer.controls.play();
 			}
 		}
 

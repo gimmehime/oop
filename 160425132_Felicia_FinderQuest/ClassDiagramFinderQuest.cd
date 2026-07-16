@@ -63,9 +63,9 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="_160425132_Felicia_FinderQuest.Entity">
-    <Position X="3" Y="6.25" Width="1.5" />
+    <Position X="3.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAIAAIAAAACAAACAAAAAAAAgAAAAIAAAAAAA=</HashCode>
+      <HashCode>AgBAAAhAQAAAQAAAACAgACggAAAgCAgAIAAIACCAAAA=</HashCode>
       <FileName>Entity.cs</FileName>
     </TypeIdentifier>
   </Class>

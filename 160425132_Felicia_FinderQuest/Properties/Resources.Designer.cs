@@ -93,6 +93,16 @@ namespace _160425132_Felicia_FinderQuest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BackgroundYouDied {
+            get {
+                object obj = ResourceManager.GetObject("BackgroundYouDied", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BgA200 {
             get {
                 object obj = ResourceManager.GetObject("BgA200", resourceCulture);
