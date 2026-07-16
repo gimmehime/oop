@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGame));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.startNewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,7 @@
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1100, 28);
+			this.menuStrip1.Size = new System.Drawing.Size(1164, 28);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -74,14 +75,14 @@
 			// startNewGameToolStripMenuItem
 			// 
 			this.startNewGameToolStripMenuItem.Name = "startNewGameToolStripMenuItem";
-			this.startNewGameToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+			this.startNewGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.startNewGameToolStripMenuItem.Text = "Start New Game";
 			this.startNewGameToolStripMenuItem.Click += new System.EventHandler(this.StartNewGameToolStripMenuItem_Click);
 			// 
 			// playPauseToolStripMenuItem
 			// 
 			this.playPauseToolStripMenuItem.Name = "playPauseToolStripMenuItem";
-			this.playPauseToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+			this.playPauseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.playPauseToolStripMenuItem.Text = "Play/Pause";
 			this.playPauseToolStripMenuItem.Click += new System.EventHandler(this.PlayPauseToolStripMenuItem_Click);
 			// 
@@ -113,7 +114,7 @@
 			this.panelGame.Controls.Add(this.labelPlayer);
 			this.panelGame.Controls.Add(this.labelTime);
 			this.panelGame.Controls.Add(this.labelArea);
-			this.panelGame.Location = new System.Drawing.Point(0, 33);
+			this.panelGame.Location = new System.Drawing.Point(33, 70);
 			this.panelGame.Margin = new System.Windows.Forms.Padding(4);
 			this.panelGame.Name = "panelGame";
 			this.panelGame.Size = new System.Drawing.Size(1100, 90);
@@ -159,7 +160,7 @@
 			// 
 			this.panelTalkArea.BackColor = System.Drawing.Color.Transparent;
 			this.panelTalkArea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.panelTalkArea.Location = new System.Drawing.Point(0, 125);
+			this.panelTalkArea.Location = new System.Drawing.Point(33, 163);
 			this.panelTalkArea.Margin = new System.Windows.Forms.Padding(4);
 			this.panelTalkArea.Name = "panelTalkArea";
 			this.panelTalkArea.Size = new System.Drawing.Size(1100, 441);
@@ -169,11 +170,11 @@
 			// labelBackToRoom
 			// 
 			this.labelBackToRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.labelBackToRoom.Font = new System.Drawing.Font("Perpetua Titling MT", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelBackToRoom.Font = new System.Drawing.Font("Perpetua Titling MT", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelBackToRoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.labelBackToRoom.Location = new System.Drawing.Point(793, 581);
+			this.labelBackToRoom.Location = new System.Drawing.Point(902, 655);
 			this.labelBackToRoom.Name = "labelBackToRoom";
-			this.labelBackToRoom.Size = new System.Drawing.Size(293, 60);
+			this.labelBackToRoom.Size = new System.Drawing.Size(240, 59);
 			this.labelBackToRoom.TabIndex = 0;
 			this.labelBackToRoom.Text = "BACK";
 			this.labelBackToRoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -183,9 +184,9 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackgroundImage = global::_160425132_Felicia_FinderQuest.Properties.Resources.background;
+			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(1100, 653);
+			this.ClientSize = new System.Drawing.Size(1164, 722);
 			this.Controls.Add(this.panelTalkArea);
 			this.Controls.Add(this.labelBackToRoom);
 			this.Controls.Add(this.panelGame);

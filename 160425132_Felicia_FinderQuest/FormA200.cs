@@ -21,6 +21,7 @@ namespace _160425132_Felicia_FinderQuest
 
 		Random rnd = new Random();
 		public WindowsMediaPlayer bgm = new WindowsMediaPlayer();
+		WindowsMediaPlayer napas = new WindowsMediaPlayer();
 		int timerEntity;
 		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.wav", "\\sound\\DepanPlayer.mp3", Properties.Resources.Idle, new Size(550, 500), new Point(130, 0), Properties.Resources.Jumpscare, new Size(650, 500), new Point(234, 0));
 
@@ -28,12 +29,13 @@ namespace _160425132_Felicia_FinderQuest
 		{
 			bgm.URL = Application.StartupPath + "\\sound\\OfficeBGM.mp3";
 			bgm.settings.setMode("loop", true);
+
 			GenerateInterval();
 			timerEntity = 0;
 			timerA200.Interval = 1000;
 			timerA200.Start();
+
 			panelGameOver.SendToBack();
-			timeJumpscare = 0;
 			panelGameOver.Visible = false;
 		}
 
@@ -51,11 +53,14 @@ namespace _160425132_Felicia_FinderQuest
 				buttonViewMonitor.Enabled = true;
 				pictureBoxTangan.Visible = false;
 				tanganAda = false;
+				napas.controls.stop();
 			}
 			else
 			{
 				buttonViewMonitor.Enabled = false;
 				pictureBoxTangan.Visible = true;
+				napas.URL = Application.StartupPath + "\\sound\\nafas.mp3";
+				napas.settings.setMode("loop", true);
 				tanganAda = true;
 			}
 		}
@@ -144,20 +149,6 @@ namespace _160425132_Felicia_FinderQuest
 			}
 		}
 
-		private void buttonTryAgain_Click(object sender, EventArgs e)
-		{
-			this.FormOffice_Load(sender, e);
-			entity.MusicDepanPlayer.controls.stop();
-			entity.HideEntity();
-			entityPresent = false;
-
-		}
-
-		private void buttonExit_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-
 		private void GenerateInterval()
 		{
 			//timeApproaching = rnd.Next(15, 31);
@@ -180,20 +171,41 @@ namespace _160425132_Felicia_FinderQuest
 			}
 		}
 
-		int timeJumpscare;
 		private void GameOver()
 		{
 			entity.DisplayJumpscare(this); // this taro di check tangan?
-			// iki yaapa biar nunggu 2 dtk baru panel game over
+										   // iki yaapa biar nunggu 2 dtk baru panel game over
+			formGame.Close();
+			if (formGame.form != null)
+			{
+				formGame.form.Close();
+			}
+			generateAgain = true;
+			timerEntity = 0;
+			entity.MusicDepanPlayer.controls.stop();
 			panelGameOver.Enabled = true;
 			panelGameOver.Visible = true;
 			panelGameOver.BringToFront();
+		}
+
+		private void buttonTryAgain_Click(object sender, EventArgs e)
+		{
+			this.FormOffice_Load(sender, e);
+			entity.MusicDepanPlayer.controls.stop();
+			entity.HideEntity();
+			entityPresent = false;
+
+		}
+
+		private void buttonExit_Click(object sender, EventArgs e)
+		{
+			this.Close();
 		}
 		#endregion
 
 
 		// pas jumpscare, form question n game di hide and paused, pas retry, form game juga retry
-		//Properties.Resources.person1, new Size(60, 90), new Point(150, 350)
+		// klo wake up again, entity idle nya send to front for some reason
 		// 1118, 610
 	}
 }

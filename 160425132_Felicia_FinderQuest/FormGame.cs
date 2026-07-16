@@ -22,8 +22,9 @@ namespace _160425132_Felicia_FinderQuest
 		#region THE BEGINNING
 		Time time;
         public Players player;
+		public FormQuestion form;
 
-        int numOfWalkArea = 3;
+		int numOfWalkArea = 3;
         WalkAreas currentWalkArea = null;
         TalkAreas currentTalkArea = null;
 
@@ -167,7 +168,7 @@ namespace _160425132_Felicia_FinderQuest
 				}
 				else if (e.KeyCode == Keys.Y && activePerson.SolvedStatus == false)
 				{
-					FormQuestion form = new FormQuestion();
+					form = new FormQuestion();
 					form.Owner = this;
 					form.ShowDialog();
 				}

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormQuestion));
 			this.labelQuestion = new System.Windows.Forms.Label();
 			this.textBoxAnswer = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
@@ -39,7 +40,7 @@
 			// 
 			this.labelQuestion.BackColor = System.Drawing.Color.Cornsilk;
 			this.labelQuestion.Font = new System.Drawing.Font("Cooper Black", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelQuestion.Location = new System.Drawing.Point(69, 42);
+			this.labelQuestion.Location = new System.Drawing.Point(98, 84);
 			this.labelQuestion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelQuestion.Name = "labelQuestion";
 			this.labelQuestion.Size = new System.Drawing.Size(964, 299);
@@ -50,7 +51,7 @@
 			// textBoxAnswer
 			// 
 			this.textBoxAnswer.Font = new System.Drawing.Font("Segoe Print", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBoxAnswer.Location = new System.Drawing.Point(311, 382);
+			this.textBoxAnswer.Location = new System.Drawing.Point(340, 424);
 			this.textBoxAnswer.Margin = new System.Windows.Forms.Padding(4);
 			this.textBoxAnswer.Name = "textBoxAnswer";
 			this.textBoxAnswer.Size = new System.Drawing.Size(657, 48);
@@ -61,7 +62,7 @@
 			this.label1.AutoSize = true;
 			this.label1.BackColor = System.Drawing.Color.Transparent;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(143, 380);
+			this.label1.Location = new System.Drawing.Point(172, 422);
 			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(147, 39);
@@ -74,7 +75,7 @@
 			this.buttonSubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
 			this.buttonSubmit.Font = new System.Drawing.Font("Modern No. 20", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonSubmit.ForeColor = System.Drawing.Color.Snow;
-			this.buttonSubmit.Location = new System.Drawing.Point(743, 442);
+			this.buttonSubmit.Location = new System.Drawing.Point(772, 484);
 			this.buttonSubmit.Margin = new System.Windows.Forms.Padding(4);
 			this.buttonSubmit.Name = "buttonSubmit";
 			this.buttonSubmit.Size = new System.Drawing.Size(225, 66);
@@ -86,11 +87,11 @@
 			// labelBackToRoom
 			// 
 			this.labelBackToRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.labelBackToRoom.Font = new System.Drawing.Font("Perpetua Titling MT", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelBackToRoom.Font = new System.Drawing.Font("Perpetua Titling MT", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelBackToRoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.labelBackToRoom.Location = new System.Drawing.Point(793, 581);
+			this.labelBackToRoom.Location = new System.Drawing.Point(902, 655);
 			this.labelBackToRoom.Name = "labelBackToRoom";
-			this.labelBackToRoom.Size = new System.Drawing.Size(293, 60);
+			this.labelBackToRoom.Size = new System.Drawing.Size(240, 59);
 			this.labelBackToRoom.TabIndex = 4;
 			this.labelBackToRoom.Text = "BACK";
 			this.labelBackToRoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -101,9 +102,9 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackgroundImage = global::_160425132_Felicia_FinderQuest.Properties.Resources.backgroundQuestion;
+			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(1100, 653);
+			this.ClientSize = new System.Drawing.Size(1164, 722);
 			this.Controls.Add(this.labelBackToRoom);
 			this.Controls.Add(this.buttonSubmit);
 			this.Controls.Add(this.label1);
