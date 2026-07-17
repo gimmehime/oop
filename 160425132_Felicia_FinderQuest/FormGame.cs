@@ -217,6 +217,11 @@ namespace _160425132_Felicia_FinderQuest
             playPauseToolStripMenuItem.Text = "Pause Game";
 			this.Focus();
         }
+
+		public void ResetGame()
+		{
+
+		}
         #endregion
 
         #region METHODS (Generate Area)

@@ -30,9 +30,9 @@ namespace _160425132_Felicia_FinderQuest
 			this.Idle.Size = size1;
 			this.Idle.Location = location1;
 			this.Jumpscare = new PictureBox();
-			this.Jumpscare.Image = image1;
-			this.Jumpscare.Size = size1;
-			this.Jumpscare.Location = location1;
+			this.Jumpscare.Image = image2;
+			this.Jumpscare.Size = size2;
+			this.Jumpscare.Location = location2;
 
 			this.SoundApproacing = new WindowsMediaPlayer();
 			this.SoundNearby = new WindowsMediaPlayer();
@@ -63,10 +63,11 @@ namespace _160425132_Felicia_FinderQuest
 		}
 		public void DisplayJumpscare(Control container)
 		{
-			this.Idle.Parent = container;
-			this.Idle.SizeMode = PictureBoxSizeMode.StretchImage;
-			this.Idle.BackColor = Color.Transparent;
-			this.Idle.BringToFront();
+			this.Jumpscare.Parent = container;
+			this.Jumpscare.SizeMode = PictureBoxSizeMode.StretchImage;
+			this.Jumpscare.BackColor = Color.Transparent;
+			this.Jumpscare.Visible = true;
+			this.Jumpscare.BringToFront();
 
 			this.PlaySound("jumpscare");
 		}
@@ -74,6 +75,10 @@ namespace _160425132_Felicia_FinderQuest
 		public void HideEntity()
 		{
 			this.Idle.Visible = false;
+		}
+		public void HideJumpscare()
+		{
+			this.Jumpscare.Visible = false;
 		}
 
 		public void PlaySound(string type)

@@ -36,10 +36,11 @@
 			this.buttonMechanism = new System.Windows.Forms.Button();
 			this.timerA200 = new System.Windows.Forms.Timer(this.components);
 			this.panelGameOver = new System.Windows.Forms.Panel();
-			this.label1 = new System.Windows.Forms.Label();
-			this.buttonTryAgain = new System.Windows.Forms.Button();
-			this.buttonExit = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
+			this.buttonExit = new System.Windows.Forms.Button();
+			this.buttonTryAgain = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.timerJumpscare = new System.Windows.Forms.Timer(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxTangan)).BeginInit();
 			this.panelGameOver.SuspendLayout();
 			this.SuspendLayout();
@@ -110,31 +111,17 @@
 			this.panelGameOver.Size = new System.Drawing.Size(1115, 576);
 			this.panelGameOver.TabIndex = 4;
 			// 
-			// label1
+			// label2
 			// 
-			this.label1.AutoSize = true;
-			this.label1.BackColor = System.Drawing.Color.Transparent;
-			this.label1.Font = new System.Drawing.Font("Chiller", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.ForeColor = System.Drawing.Color.Firebrick;
-			this.label1.Location = new System.Drawing.Point(214, 119);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(713, 139);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "ANDA PINGSAN!";
-			// 
-			// buttonTryAgain
-			// 
-			this.buttonTryAgain.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.buttonTryAgain.BackgroundImage = global::_160425132_Felicia_FinderQuest.Properties.Resources.BackgroundYouDied;
-			this.buttonTryAgain.Font = new System.Drawing.Font("Perpetua Titling MT", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonTryAgain.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.buttonTryAgain.Location = new System.Drawing.Point(269, 322);
-			this.buttonTryAgain.Name = "buttonTryAgain";
-			this.buttonTryAgain.Size = new System.Drawing.Size(299, 62);
-			this.buttonTryAgain.TabIndex = 1;
-			this.buttonTryAgain.Text = "wake up";
-			this.buttonTryAgain.UseVisualStyleBackColor = false;
-			this.buttonTryAgain.Click += new System.EventHandler(this.buttonTryAgain_Click);
+			this.label2.AutoSize = true;
+			this.label2.BackColor = System.Drawing.Color.Transparent;
+			this.label2.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.label2.Location = new System.Drawing.Point(364, 387);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(105, 27);
+			this.label2.TabIndex = 3;
+			this.label2.Text = "(try again)";
 			// 
 			// buttonExit
 			// 
@@ -150,17 +137,36 @@
 			this.buttonExit.UseVisualStyleBackColor = false;
 			this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
 			// 
-			// label2
+			// buttonTryAgain
 			// 
-			this.label2.AutoSize = true;
-			this.label2.BackColor = System.Drawing.Color.Transparent;
-			this.label2.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.label2.Location = new System.Drawing.Point(364, 387);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(105, 27);
-			this.label2.TabIndex = 3;
-			this.label2.Text = "(try again)";
+			this.buttonTryAgain.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+			this.buttonTryAgain.BackgroundImage = global::_160425132_Felicia_FinderQuest.Properties.Resources.BackgroundYouDied;
+			this.buttonTryAgain.Font = new System.Drawing.Font("Perpetua Titling MT", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonTryAgain.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.buttonTryAgain.Location = new System.Drawing.Point(269, 322);
+			this.buttonTryAgain.Name = "buttonTryAgain";
+			this.buttonTryAgain.Size = new System.Drawing.Size(299, 62);
+			this.buttonTryAgain.TabIndex = 1;
+			this.buttonTryAgain.Text = "wake up";
+			this.buttonTryAgain.UseVisualStyleBackColor = false;
+			this.buttonTryAgain.Click += new System.EventHandler(this.buttonTryAgain_Click);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.BackColor = System.Drawing.Color.Transparent;
+			this.label1.Font = new System.Drawing.Font("Chiller", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.ForeColor = System.Drawing.Color.Firebrick;
+			this.label1.Location = new System.Drawing.Point(214, 119);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(713, 139);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "ANDA PINGSAN!";
+			// 
+			// timerJumpscare
+			// 
+			this.timerJumpscare.Interval = 2300;
+			this.timerJumpscare.Tick += new System.EventHandler(this.timerJumpscare_Tick);
 			// 
 			// FormA200
 			// 
@@ -198,5 +204,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button buttonExit;
+		private System.Windows.Forms.Timer timerJumpscare;
 	}
 }

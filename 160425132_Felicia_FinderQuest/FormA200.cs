@@ -23,7 +23,7 @@ namespace _160425132_Felicia_FinderQuest
 		public WindowsMediaPlayer bgm = new WindowsMediaPlayer();
 		WindowsMediaPlayer napas = new WindowsMediaPlayer();
 		int timerEntity;
-		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.wav", "\\sound\\DepanPlayer.mp3", Properties.Resources.Idle, new Size(550, 500), new Point(130, 0), Properties.Resources.Jumpscare, new Size(650, 500), new Point(234, 0));
+		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.wav", "\\sound\\DepanPlayer.mp3", Properties.Resources.Idle, new Size(550, 500), new Point(130, 0), Properties.Resources.Jumpscare, new Size(650, 500), new Point(130, 0));
 
 		private void FormOffice_Load(object sender, EventArgs e)
 		{
@@ -34,6 +34,7 @@ namespace _160425132_Felicia_FinderQuest
 			timerEntity = 0;
 			timerA200.Interval = 1000;
 			timerA200.Start();
+			timerJumpscare.Stop();
 
 			panelGameOver.SendToBack();
 			panelGameOver.Visible = false;
@@ -68,8 +69,6 @@ namespace _160425132_Felicia_FinderQuest
 
 		#region GANTI FORM
 		FormGame formGame = new FormGame();
-		//FormQuestion formQuestion = new FormQuestion();
-		//public string currentForm;
 		private void buttonViewMonitor_Click(object sender, EventArgs e)
 		{
 			bgm.controls.pause();
@@ -88,18 +87,7 @@ namespace _160425132_Felicia_FinderQuest
 			formGame.Show();
 			this.Hide();
 
-			//if (currentForm == null || currentForm == "game")
-			//{
-				
-			//}
-			////else if (currentForm == "question")
-			//{
-			//	formQuestion.KirimForm(this);
-			//	formQuestion.changeForm = false;
-			//	formQuestion.Show();
-			//	this.Hide();
-			//}
-		// what will happen to formgame klo tutup form question after pindah ke ruangan n balik lagi			
+			
 		}
 		#endregion
 
@@ -171,30 +159,36 @@ namespace _160425132_Felicia_FinderQuest
 			}
 		}
 
-		private void GameOver()
+		
+		private void timerJumpscare_Tick(object sender, EventArgs e)
 		{
-			entity.DisplayJumpscare(this); // this taro di check tangan?
-										   // iki yaapa biar nunggu 2 dtk baru panel game over
+			timerJumpscare.Stop();
 			formGame.Close();
 			if (formGame.form != null)
 			{
 				formGame.form.Close();
 			}
+
+			entity.HideJumpscare();
 			generateAgain = true;
 			timerEntity = 0;
-			entity.MusicDepanPlayer.controls.stop();
 			panelGameOver.Enabled = true;
 			panelGameOver.Visible = true;
 			panelGameOver.BringToFront();
 		}
 
+		private void GameOver()
+		{
+			entity.HideEntity();
+			entity.MusicDepanPlayer.controls.stop();
+			entity.DisplayJumpscare(this);
+			timerJumpscare.Start();
+		}
+
 		private void buttonTryAgain_Click(object sender, EventArgs e)
 		{
 			this.FormOffice_Load(sender, e);
-			entity.MusicDepanPlayer.controls.stop();
-			entity.HideEntity();
 			entityPresent = false;
-
 		}
 
 		private void buttonExit_Click(object sender, EventArgs e)
@@ -204,8 +198,25 @@ namespace _160425132_Felicia_FinderQuest
 		#endregion
 
 
+
 		// pas jumpscare, form question n game di hide and paused, pas retry, form game juga retry
 		// klo wake up again, entity idle nya send to front for some reason
 		// 1118, 610
+
+		//FormQuestion formQuestion = new FormQuestion();
+		//public string currentForm;
+
+		//if (currentForm == null || currentForm == "game")
+		//{
+
+		//}
+		////else if (currentForm == "question")
+		//{
+		//	formQuestion.KirimForm(this);
+		//	formQuestion.changeForm = false;
+		//	formQuestion.Show();
+		//	this.Hide();
+		//}
+		// what will happen to formgame klo tutup form question after pindah ke ruangan n balik lagi			
 	}
 }
