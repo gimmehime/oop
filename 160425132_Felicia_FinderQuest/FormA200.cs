@@ -35,6 +35,7 @@ namespace _160425132_Felicia_FinderQuest
 			timerA200.Interval = 1000;
 			timerA200.Start();
 			timerJumpscare.Stop();
+			timerWon.Stop();
 
 			panelGameOver.SendToBack();
 			panelGameOver.Visible = false;
@@ -99,6 +100,20 @@ namespace _160425132_Felicia_FinderQuest
 			timerEntity++;
 			CheckTime();
 			CheckTangan();
+			if (formGame.won)
+			{
+				timerWon.Start();
+			}
+		}
+		private void timerWon_Tick(object sender, EventArgs e)
+		{
+			timerWon.Stop();
+			timerA200.Stop();
+			formGame.Close();
+			this.bgm.controls.stop();
+			FormOutro form = new FormOutro();
+			this.Hide();
+			form.Show();
 		}
 
 		private void CheckTime()
@@ -139,12 +154,12 @@ namespace _160425132_Felicia_FinderQuest
 
 		private void GenerateInterval()
 		{
-			//timeApproaching = rnd.Next(15, 31);
-			//timeNearby = rnd.Next(15, 21);
-			//durationPresent = rnd.Next(7, 16);
-			timeApproaching = 2;
-			timeNearby = 2;
-			durationPresent = 7;
+			timeApproaching = rnd.Next(10, 21);
+			timeNearby = rnd.Next(15, 21);
+			durationPresent = rnd.Next(7, 16);
+			//timeApproaching = 2;
+			//timeNearby = 2;
+			//durationPresent = 7;
 		}
 
 		private void CheckTangan()
@@ -163,12 +178,8 @@ namespace _160425132_Felicia_FinderQuest
 		private void timerJumpscare_Tick(object sender, EventArgs e)
 		{
 			timerJumpscare.Stop();
-			formGame.Close();
-			if (formGame.form != null)
-			{
-				formGame.form.Close();
-			}
 
+			formGame.ResetGame();
 			entity.HideJumpscare();
 			generateAgain = true;
 			timerEntity = 0;
@@ -179,6 +190,14 @@ namespace _160425132_Felicia_FinderQuest
 
 		private void GameOver()
 		{
+			formGame.Close();
+			if (formGame.form != null)
+			{
+				formGame.form.Close();
+			}
+			this.bgm.controls.stop();
+
+
 			entity.HideEntity();
 			entity.MusicDepanPlayer.controls.stop();
 			entity.DisplayJumpscare(this);

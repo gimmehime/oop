@@ -66,6 +66,12 @@
     <Compile Include="FormA200.Designer.cs">
       <DependentUpon>FormA200.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOutro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOutro.Designer.cs">
+      <DependentUpon>FormOutro.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormQuestion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormA200.resx">
       <DependentUpon>FormA200.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOutro.resx">
+      <DependentUpon>FormOutro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormQuestion.resx">
       <DependentUpon>FormQuestion.cs</DependentUpon>

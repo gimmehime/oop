@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +24,7 @@ namespace _160425132_Felicia_FinderQuest
 		Time time;
         public Players player;
 		public FormQuestion form;
+		public bool won = false;
 
 		int numOfWalkArea = 3;
         WalkAreas currentWalkArea = null;
@@ -39,7 +41,8 @@ namespace _160425132_Felicia_FinderQuest
 
         private void FormGame_Load(object sender, EventArgs e)
         {
-            panelGame.Visible = false;
+			player = new Players("John", Properties.Resources.player_right, new Size(50, 80), new Point(10, 370));
+			panelGame.Visible = false;
             labelTime.Visible = false;
             panelTalkArea.Visible = false;
 
@@ -77,7 +80,8 @@ namespace _160425132_Felicia_FinderQuest
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit(); // new stuff!
+			//Application.Exit();
+			this.Close();
         }
 
         private void HelpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,6 +138,7 @@ namespace _160425132_Felicia_FinderQuest
 								PlaySound("win game");
 								MessageBox.Show("Congratulation! You win the game!");
 								GameOver();
+								won = true;
 							}
 						}
 					}
@@ -195,7 +200,7 @@ namespace _160425132_Felicia_FinderQuest
             playPauseToolStripMenuItem.Enabled = true;
             startNewGameToolStripMenuItem.Enabled = false;
 
-            time = new Time(0, 1, 0);  // untuk set timer ke 60 dtk // kecepetan help
+            time = new Time(0, 1, 0);  // untuk set timer ke 60 dtk
             timerTime.Start();
 
             if (currentWalkArea != null)
@@ -206,7 +211,6 @@ namespace _160425132_Felicia_FinderQuest
             currentWalkArea = null;
             GenerateWalkArea(); // ciptakan walk area 1
 
-            player = new Players("John", Properties.Resources.player_right, new Size(50, 80), new Point(10, 370), time);
 
             labelPlayer.Text = player.DisplayData();
             player.DisplayPicture(this);
@@ -220,7 +224,15 @@ namespace _160425132_Felicia_FinderQuest
 
 		public void ResetGame()
 		{
+			//this.FormGame_Load(sender, e); -> gabisa krn ga dari event (cth button_click, di parameter nya ada sender dan e nya jadi bisa dipake buat FormGame_Load)
+			panelGame.Visible = false;
+			labelTime.Visible = false;
+			panelTalkArea.Visible = false;
+			this.BackgroundImage = Properties.Resources.background;
+			this.backSoundPlayer.controls.stop();
 
+			playPauseToolStripMenuItem.Enabled = false;
+			player.Reset();
 		}
         #endregion
 

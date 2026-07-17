@@ -41,6 +41,7 @@
 			this.buttonTryAgain = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.timerJumpscare = new System.Windows.Forms.Timer(this.components);
+			this.timerWon = new System.Windows.Forms.Timer(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxTangan)).BeginInit();
 			this.panelGameOver.SuspendLayout();
 			this.SuspendLayout();
@@ -168,6 +169,11 @@
 			this.timerJumpscare.Interval = 2300;
 			this.timerJumpscare.Tick += new System.EventHandler(this.timerJumpscare_Tick);
 			// 
+			// timerWon
+			// 
+			this.timerWon.Interval = 2500;
+			this.timerWon.Tick += new System.EventHandler(this.timerWon_Tick);
+			// 
 			// FormA200
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -205,5 +211,6 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button buttonExit;
 		private System.Windows.Forms.Timer timerJumpscare;
+		private System.Windows.Forms.Timer timerWon;
 	}
 }
