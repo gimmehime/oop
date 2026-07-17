@@ -17,11 +17,11 @@ namespace _160425132_Felicia_FinderQuest
 		#endregion
 
 		#region constructor
-		public Players(string name, Image image, Size size, Point location)
+		public Players(string name, Image image, Size size, Point location, Time time)
 		{
 			this.Name = name;
 			this.Score = 0;
-			this.PlayTime = new Time();
+			this.PlayTime = time;
 			this.Picture = new PictureBox();
 			this.Picture.Image = image;
 			this.Picture.Size = size;
@@ -93,7 +93,6 @@ namespace _160425132_Felicia_FinderQuest
 		{
 			this.Score += score;
 		}
-
 		public void Reset()
 		{
 			this.Score = 0;

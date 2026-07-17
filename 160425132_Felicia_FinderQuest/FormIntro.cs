@@ -13,9 +13,9 @@ using AxWMPLib;
 
 namespace _160425132_Felicia_FinderQuest
 {
-	public partial class Form1 : Form
+	public partial class FormIntro : Form
 	{
-		public Form1()
+		public FormIntro()
 		{
 			InitializeComponent();
 		}

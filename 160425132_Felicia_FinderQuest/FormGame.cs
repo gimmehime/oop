@@ -41,7 +41,8 @@ namespace _160425132_Felicia_FinderQuest
 
         private void FormGame_Load(object sender, EventArgs e)
         {
-			player = new Players("John", Properties.Resources.player_right, new Size(50, 80), new Point(10, 370));
+			time = new Time(0, 1, 0);
+			player = new Players("John", Properties.Resources.player_right, new Size(50, 80), new Point(10, 370), time);
 			panelGame.Visible = false;
             labelTime.Visible = false;
             panelTalkArea.Visible = false;
@@ -52,7 +53,7 @@ namespace _160425132_Felicia_FinderQuest
             this.KeyPreview = true; // prioritaskan input pakai keyboard?
             this.DoubleBuffered = true;  // krn banyak gambar yg berubah" (berubahnya cepet banget) jadi bisa flicker jedag jedug
                                          // gambar" disusun di sebuah buffer/memori, lalu nanti bergantian?
-        }
+		}
 		#endregion
 
 		#region MENU STRIP
@@ -113,14 +114,8 @@ namespace _160425132_Felicia_FinderQuest
         {
             int distance = 30;
 
-            if (paused == false)
+            if (paused == false && playPauseToolStripMenuItem.Enabled)
             {
-				// or bisa pakai
-				//if (paused)
-				//{
-				//	return;
-				//}
-
 				if (e.KeyCode == Keys.Right)
 				{
 					if (player.Picture.Location.X + player.Picture.Width >= this.Width - 20)
@@ -200,7 +195,6 @@ namespace _160425132_Felicia_FinderQuest
             playPauseToolStripMenuItem.Enabled = true;
             startNewGameToolStripMenuItem.Enabled = false;
 
-            time = new Time(0, 1, 0);  // untuk set timer ke 60 dtk
             timerTime.Start();
 
             if (currentWalkArea != null)
@@ -222,12 +216,12 @@ namespace _160425132_Felicia_FinderQuest
 			this.Focus();
         }
 
-		public void ResetGame()
+		public void ResetTotal()
 		{
-			//this.FormGame_Load(sender, e); -> gabisa krn ga dari event (cth button_click, di parameter nya ada sender dan e nya jadi bisa dipake buat FormGame_Load)
 			panelGame.Visible = false;
 			labelTime.Visible = false;
 			panelTalkArea.Visible = false;
+			currentWalkArea.RemoveAllPersons();
 			this.BackgroundImage = Properties.Resources.background;
 			this.backSoundPlayer.controls.stop();
 
@@ -366,25 +360,29 @@ namespace _160425132_Felicia_FinderQuest
 			{
 				backSoundPlayer.URL = Application.StartupPath + "\\sound\\BacksoundWalkArea.mp3";
 				backSoundPlayer.settings.setMode("loop", true);
+				backSoundPlayer.settings.volume = 20;
 			}
 			else if (type == "talk area")
 			{
 				backSoundPlayer.URL = Application.StartupPath + "\\sound\\BacksoundTalkArea.mp3";
 				backSoundPlayer.settings.setMode("loop", true);
+				backSoundPlayer.settings.volume = 20;
 			}
 			else if (type == "lose game")
 			{
 				otherSoundPlayer.URL = Application.StartupPath + "\\sound\\LoseGame.mp3";
+				otherSoundPlayer.settings.volume = 20;
 			}
 			else if (type == "win game")
 			{
 				otherSoundPlayer.URL = Application.StartupPath + "\\sound\\WinGame.mp3";
+				otherSoundPlayer.settings.volume = 20;
 			}
 			otherSoundPlayer.controls.play();
 		}
 		#endregion
 
-
+		#region METHOD (Ganti Form)
 		FormA200 formA200;
 		public void KirimForm(FormA200 frm)
 		{
@@ -410,6 +408,7 @@ namespace _160425132_Felicia_FinderQuest
 		{
 			this.Close();
 		}
+		#endregion
 	}
 }
 

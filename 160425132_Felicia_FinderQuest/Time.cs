@@ -14,22 +14,19 @@ namespace _160425132_Felicia_FinderQuest // add existing file (klik kanan spt ma
 
         #region constructors
 
-        //default constructor
-        public Time()
-        {
-            this.Hour = 1;
+        public Time() //def constructor
+		{
+			this.Hour = 1;
             this.Minute = 2;
             this.Second = 3;
         }
 
-        //parameterized constructor
         public Time(int hh, int mm, int ss)
         {
             this.Hour = hh;
             this.Minute = mm;
             this.Second = ss;
         }
-
         #endregion
 
         #region properties
@@ -84,28 +81,23 @@ namespace _160425132_Felicia_FinderQuest // add existing file (klik kanan spt ma
         #endregion
 
         #region methods
-        //method utk mengkonversi waktu saat ini (hh:mm:ss) ke detik semua
         public int ConvertToSecond()
         {
             int totalSecond = this.Hour * 3600 + this.Minute * 60 + this.Second;
             return totalSecond;
         }
 
-        //method utk menambah waktu saat ini (hh:mm:ss) dengan detik
         public void AddWithSecond(int detikInputan)
         {
-            //1. Konversikan waktu saat ini ke detik semua
-            //(gunakan method ConvertToSecond)
             int totalDetikSaatIni = this.ConvertToSecond();
-            //2. Tambahkan total detik saat ini dengan detik yg diinputkan user
             int totalDetik = totalDetikSaatIni + detikInputan;
-            //3. Konversikan total detik (hasil langkah2) ke hh:mm:ss
+            
+            //convert balik ke hh:mm:ss
             this.Hour = totalDetik / 3600;
             this.Minute = totalDetik % 3600 / 60;
             this.Second = totalDetik % 3600 % 60;
         }
 
-        //method utk menampilkan data waktu dalam format hh:mm:ss
         public string DisplayData()
         {
             string data = this.Hour.ToString().PadLeft(2, '0') + ":" +

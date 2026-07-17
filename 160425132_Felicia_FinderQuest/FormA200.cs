@@ -179,7 +179,7 @@ namespace _160425132_Felicia_FinderQuest
 		{
 			timerJumpscare.Stop();
 
-			formGame.ResetGame();
+			formGame.ResetTotal();
 			entity.HideJumpscare();
 			generateAgain = true;
 			timerEntity = 0;
