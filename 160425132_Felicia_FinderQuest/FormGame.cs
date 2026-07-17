@@ -221,7 +221,7 @@ namespace _160425132_Felicia_FinderQuest
 			panelGame.Visible = false;
 			labelTime.Visible = false;
 			panelTalkArea.Visible = false;
-			currentWalkArea.RemoveAllPersons();
+			//currentWalkArea.RemoveAllPersons();
 			this.BackgroundImage = Properties.Resources.background;
 			this.backSoundPlayer.controls.stop();
 
