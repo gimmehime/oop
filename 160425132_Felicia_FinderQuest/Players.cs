@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -97,7 +97,7 @@ namespace _160425132_Felicia_FinderQuest
 		{
 			this.Score = 0;
 			this.PlayTime = null;
-			this.Picture.Location = new Point (10, 370);
+			this.Picture.Location = new Point (10, 400);
 			this.Picture.SendToBack();
 		}
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,10 +39,13 @@ namespace _160425132_Felicia_FinderQuest
         public WindowsMediaPlayer backSoundPlayer = new WindowsMediaPlayer();  //bgm
 		public WindowsMediaPlayer otherSoundPlayer;
 
+		// Ghost warning indicator saat hantu mendekat
+		private PictureBox ghostWarning;
+
         private void FormGame_Load(object sender, EventArgs e)
         {
 			time = new Time(0, 1, 0);
-			player = new Players("John", Properties.Resources.player_right, new Size(50, 80), new Point(10, 370), time);
+			player = new Players("John", Properties.Resources.player_right, new Size(50, 80), new Point(10, 400), time);
 			panelGame.Visible = false;
             labelTime.Visible = false;
             panelTalkArea.Visible = false;
@@ -53,6 +56,14 @@ namespace _160425132_Felicia_FinderQuest
             this.KeyPreview = true; // prioritaskan input pakai keyboard?
             this.DoubleBuffered = true;  // krn banyak gambar yg berubah" (berubahnya cepet banget) jadi bisa flicker jedag jedug
                                          // gambar" disusun di sebuah buffer/memori, lalu nanti bergantian?
+
+			// Buat ghost warning indicator
+			ghostWarning = new PictureBox();
+			ghostWarning.Image = Properties.Resources.Idle;
+			ghostWarning.SizeMode = PictureBoxSizeMode.StretchImage;
+			ghostWarning.BackColor = Color.Transparent;
+			ghostWarning.Visible = false;
+			this.Controls.Add(ghostWarning);
 		}
 		#endregion
 
@@ -100,11 +111,18 @@ namespace _160425132_Felicia_FinderQuest
             if (time.Hour == 0 && time.Minute == 0 && time.Second == 0)
             {
                 timerTime.Stop();
-                backSoundPlayer.controls.stop();  // knp ini ga di dlm GameOver() aja
+
+                // Kalau sudah menang, jangan tampilkan game over
+                if (won) return;
+
+                backSoundPlayer.controls.stop();
                 PlaySound("lose game");
 
-                MessageBox.Show("Game Over. Time is up.");
-                GameOver();
+                // Arahkan kembali ke FormA200 (cover eyes mode)
+                if (formA200 != null)
+                {
+                    formA200.HandleGameTimeUp();
+                }
             }
         }
 		#endregion
@@ -166,11 +184,19 @@ namespace _160425132_Felicia_FinderQuest
 				{
 					ExitTalkArea();
 				}
-				else if (e.KeyCode == Keys.Y && activePerson.SolvedStatus == false)
+				else if (e.KeyCode == Keys.Y)
 				{
-					form = new FormQuestion();
-					form.Owner = this;
-					form.ShowDialog();
+					// Cek apakah sudah bicara dengan person (tekan Enter dulu)
+					if (activePerson == null || enterTalkArea == false)
+					{
+						MessageBox.Show("Kamu harus menekan Enter di dekat person terlebih dahulu!", "Peringatan");
+					}
+					else if (activePerson.SolvedStatus == false)
+					{
+						form = new FormQuestion();
+						form.Owner = this;
+						form.ShowDialog();
+					}
 				}
 				if (player != null)
 					player.DisplayPicture(this);  // utk menampilkan player pada form
@@ -187,6 +213,21 @@ namespace _160425132_Felicia_FinderQuest
             labelTime.Visible = false;
             startNewGameToolStripMenuItem.Enabled = true;
         }
+
+		// Reset waktu game setelah game over (dipanggil dari FormA200)
+		public void ResetGameTime()
+		{
+			time = new Time(0, 1, 0); // reset ke 1 menit
+			labelTime.Text = time.DisplayData();
+			player.PlayTime = time;
+			timerTime.Start();
+			panelGame.Visible = true;
+			labelTime.Visible = true;
+			playPauseToolStripMenuItem.Enabled = true;
+			startNewGameToolStripMenuItem.Enabled = false;
+			paused = false;
+			playPauseToolStripMenuItem.Text = "Pause Game";
+		}
 
         private void StartGame()  // start from here
         {
@@ -237,9 +278,9 @@ namespace _160425132_Felicia_FinderQuest
 			{
 				currentWalkArea = new WalkAreas("The Barn", Properties.Resources.walkArea1, 1);
 
-				currentWalkArea.AddPerson(1, "Anna", Properties.Resources.person1, new Size(60, 90), new Point(150, 350), "I have a question for you. Are you ready?\nPress 'y' to continue");
-				currentWalkArea.AddPerson(2, "Andy", Properties.Resources.person2, new Size(60, 90), new Point(420, 350), "Can you answer my question? Let's go!\nPress 'y' to continue");
-				currentWalkArea.AddPerson(3, "Bobby", Properties.Resources.person3, new Size(60, 90), new Point(600, 360), "Just answer my question please..\nPress 'y' to continue");
+				currentWalkArea.AddPerson(1, "Anna", Properties.Resources.person1, new Size(60, 90), new Point(150, 380), "I have a question for you. Are you ready?\nPress 'y' to continue");
+				currentWalkArea.AddPerson(2, "Andy", Properties.Resources.person2, new Size(60, 90), new Point(420, 380), "Can you answer my question? Let's go!\nPress 'y' to continue");
+				currentWalkArea.AddPerson(3, "Bobby", Properties.Resources.person3, new Size(60, 90), new Point(600, 380), "Just answer my question please..\nPress 'y' to continue");
 			}
 			else if (currentWalkArea.NoArea == 2)
 			{
@@ -247,8 +288,8 @@ namespace _160425132_Felicia_FinderQuest
 				currentWalkArea.RemoveAllPersons();
 				currentWalkArea = new WalkAreas("The Field", Properties.Resources.walkArea2, 2);
 
-				currentWalkArea.AddPerson(4, "Rina", Properties.Resources.person4, new Size(60, 90), new Point(100, 300), "I'm sure you can answer my question\nPress 'y' to continue");
-				currentWalkArea.AddPerson(5, "Tommy", Properties.Resources.person5, new Size(60, 90), new Point(450, 350), "You look so smart. Can you answer this?\nPress 'y' to continue");
+				currentWalkArea.AddPerson(4, "Rina", Properties.Resources.person4, new Size(60, 90), new Point(100, 380), "I'm sure you can answer my question\nPress 'y' to continue");
+				currentWalkArea.AddPerson(5, "Tommy", Properties.Resources.person5, new Size(60, 90), new Point(450, 380), "You look so smart. Can you answer this?\nPress 'y' to continue");
 			}
 			else if (currentWalkArea.NoArea == 3)
 			{
@@ -395,6 +436,7 @@ namespace _160425132_Felicia_FinderQuest
 			{
 				e.Cancel = true;
 				this.Hide();
+				HideGhostWarning(); // bersihkan warning saat balik
 				formA200.Show();
 				formA200.bgm.controls.play();
 				backSoundPlayer.controls.pause();
@@ -403,6 +445,36 @@ namespace _160425132_Felicia_FinderQuest
 				//formA200.currentForm = "game";
 			}
 		}
+
+		#region GHOST WARNING
+		// Tampilkan gambar hantu sebagai peringatan di layar game
+		public void ShowGhostWarning(string level)
+		{
+			if (ghostWarning == null) return;
+			ghostWarning.Visible = true;
+
+			if (level == "approaching")
+			{
+				// Hantu kecil di pojok kanan bawah
+				ghostWarning.Size = new Size(50, 86);
+				ghostWarning.Location = new Point(this.ClientSize.Width - 70, this.ClientSize.Height - 110);
+			}
+			else if (level == "nearby")
+			{
+				// Hantu lebih besar, sudah dekat!
+				ghostWarning.Size = new Size(120, 207);
+				ghostWarning.Location = new Point(this.ClientSize.Width - 140, this.ClientSize.Height - 230);
+			}
+			ghostWarning.BringToFront();
+		}
+
+		// Sembunyikan warning hantu
+		public void HideGhostWarning()
+		{
+			if (ghostWarning != null)
+				ghostWarning.Visible = false;
+		}
+		#endregion
 
 		private void labelBackToRoom_Click(object sender, EventArgs e)
 		{
