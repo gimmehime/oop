@@ -23,8 +23,9 @@ namespace _160425132_Felicia_FinderQuest
 		#region THE BEGINNING
 		Time time;
         public Players player;
-		public FormQuestion form;
+		public FormQuestion formQuestion;
 		public bool won = false;
+		public bool tutup;
 
 		int numOfWalkArea = 3;
         WalkAreas currentWalkArea = null;
@@ -46,6 +47,7 @@ namespace _160425132_Felicia_FinderQuest
 			panelGame.Visible = false;
             labelTime.Visible = false;
             panelTalkArea.Visible = false;
+			tutup = false;
 
             playPauseToolStripMenuItem.Enabled = false;
             timerTime.Interval = 1000;
@@ -168,9 +170,9 @@ namespace _160425132_Felicia_FinderQuest
 				}
 				else if (e.KeyCode == Keys.Y && activePerson.SolvedStatus == false)
 				{
-					form = new FormQuestion();
-					form.Owner = this;
-					form.ShowDialog();
+					formQuestion = new FormQuestion();
+					formQuestion.Owner = this;
+					formQuestion.ShowDialog();
 				}
 				if (player != null)
 					player.DisplayPicture(this);  // utk menampilkan player pada form
@@ -215,19 +217,6 @@ namespace _160425132_Felicia_FinderQuest
             playPauseToolStripMenuItem.Text = "Pause Game";
 			this.Focus();
         }
-
-		public void ResetTotal()
-		{
-			panelGame.Visible = false;
-			labelTime.Visible = false;
-			panelTalkArea.Visible = false;
-			//currentWalkArea.RemoveAllPersons();
-			this.BackgroundImage = Properties.Resources.background;
-			this.backSoundPlayer.controls.stop();
-
-			playPauseToolStripMenuItem.Enabled = false;
-			player.Reset();
-		}
         #endregion
 
         #region METHODS (Generate Area)
@@ -391,16 +380,18 @@ namespace _160425132_Felicia_FinderQuest
 
 		private void FormGame_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (e.CloseReason == CloseReason.UserClosing)
+			if (tutup == false)
 			{
-				e.Cancel = true;
-				this.Hide();
-				formA200.Show();
-				formA200.bgm.controls.play();
-				backSoundPlayer.controls.pause();
-				if (otherSoundPlayer != null)
-					otherSoundPlayer.controls.pause();
-				//formA200.currentForm = "game";
+				if (e.CloseReason == CloseReason.UserClosing)
+				{
+					e.Cancel = true;
+					this.Hide();
+					formA200.Show();
+					formA200.bgm.controls.play();
+					backSoundPlayer.controls.pause();
+					if (otherSoundPlayer != null)
+						otherSoundPlayer.controls.pause();
+				}
 			}
 		}
 
@@ -413,3 +404,15 @@ namespace _160425132_Felicia_FinderQuest
 }
 
 // multiline di textbox di enabled spy bisa di tinggiin, autosize dimatiin di label spy bisa ganti size
+//public void ResetTotal()
+//{
+	//panelGame.Visible = false;
+	//labelTime.Visible = false;
+	//panelTalkArea.Visible = false;
+	////currentWalkArea.RemoveAllPersons();
+	//this.BackgroundImage = Properties.Resources.background;
+	//this.backSoundPlayer.controls.stop();
+
+	//playPauseToolStripMenuItem.Enabled = false;
+	//player.Reset();
+//}

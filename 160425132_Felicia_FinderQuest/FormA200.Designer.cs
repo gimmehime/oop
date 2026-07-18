@@ -166,7 +166,7 @@
 			// 
 			// timerJumpscare
 			// 
-			this.timerJumpscare.Interval = 2300;
+			this.timerJumpscare.Interval = 2000;
 			this.timerJumpscare.Tick += new System.EventHandler(this.timerJumpscare_Tick);
 			// 
 			// timerWon

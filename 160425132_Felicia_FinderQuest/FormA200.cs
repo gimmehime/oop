@@ -87,8 +87,6 @@ namespace _160425132_Felicia_FinderQuest
 			formGame.KirimForm(this);
 			formGame.Show();
 			this.Hide();
-
-			
 		}
 		#endregion
 
@@ -179,7 +177,6 @@ namespace _160425132_Felicia_FinderQuest
 		{
 			timerJumpscare.Stop();
 
-			//formGame.ResetTotal();
 			entity.HideJumpscare();
 			generateAgain = true;
 			timerEntity = 0;
@@ -190,11 +187,16 @@ namespace _160425132_Felicia_FinderQuest
 
 		private void GameOver()
 		{
+			formGame.tutup = true;	
 			formGame.Close();
-			if (formGame.form != null)
+			if (formGame.formQuestion != null)
 			{
-				formGame.form.Close();
+				formGame.formQuestion.Close();
 			}
+			formGame.backSoundPlayer.controls.pause();  
+			if (formGame.otherSoundPlayer != null)
+				formGame.otherSoundPlayer.controls.pause();
+			this.Show();
 			this.bgm.controls.stop();
 
 
@@ -208,6 +210,8 @@ namespace _160425132_Felicia_FinderQuest
 		{
 			this.FormOffice_Load(sender, e);
 			entityPresent = false;
+			formGame.tutup = false;
+			formGame = new FormGame();
 		}
 
 		private void buttonExit_Click(object sender, EventArgs e)
