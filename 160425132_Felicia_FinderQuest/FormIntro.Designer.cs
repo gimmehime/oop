@@ -43,14 +43,14 @@
 			this.axWindowsMediaPlayer1.TabIndex = 0;
 			this.axWindowsMediaPlayer1.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.axWindowsMediaPlayer1_PlayStateChange);
 			// 
-			// Form1
+			// FormIntro
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.axWindowsMediaPlayer1);
-			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Name = "FormIntro";
+			this.Text = "FormIntro";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
 			this.ResumeLayout(false);

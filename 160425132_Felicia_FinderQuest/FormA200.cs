@@ -23,7 +23,7 @@ namespace _160425132_Felicia_FinderQuest
 		public WindowsMediaPlayer bgm = new WindowsMediaPlayer();
 		WindowsMediaPlayer napas = new WindowsMediaPlayer();
 		int timerEntity;
-		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.wav", "\\sound\\DepanPlayer.mp3", Properties.Resources.Idle, new Size(350, 605), new Point(150, 25), Properties.Resources.Jumpscare, new Size(900, 500), new Point(0, 0));
+		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.mp3", "\\sound\\DepanPlayer.mp3", Properties.Resources.Idle, new Size(350, 605), new Point(150, 25), Properties.Resources.Jumpscare, new Size(900, 500), new Point(0, 0));
 
 		private void FormOffice_Load(object sender, EventArgs e)
 		{
@@ -125,6 +125,7 @@ namespace _160425132_Felicia_FinderQuest
 			timerEntity = 0;
 			GenerateInterval();
 		}
+		#endregion
 
 		// Dipanggil saat hantu muncul dan player sedang di FormGame → paksa balik ke ruangan
 		private void ForceReturnFromGame()
@@ -160,7 +161,7 @@ namespace _160425132_Felicia_FinderQuest
 			timeNearby = 1;       // nearby di detik ke-3
 			durationPresent = 5;  // hantu stay 5 detik, lalu ulang lagi
 		}
-		#endregion
+
 
 		#region TIMER
 		int timeApproaching, timeNearby, durationPresent;
