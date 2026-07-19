@@ -25,6 +25,7 @@ namespace _160425132_Felicia_FinderQuest
         public Players player;
 		public FormQuestion form;
 		public bool won = false;
+		public bool tutup;
 
 		int numOfWalkArea = 3;
         WalkAreas currentWalkArea = null;
@@ -44,26 +45,19 @@ namespace _160425132_Felicia_FinderQuest
 
         private void FormGame_Load(object sender, EventArgs e)
         {
-			time = new Time(0, 1, 0);
+			time = new Time(0, 0, 15);
 			player = new Players("John", Properties.Resources.player_right, new Size(50, 80), new Point(10, 400), time);
 			panelGame.Visible = false;
             labelTime.Visible = false;
             panelTalkArea.Visible = false;
+			tutup = false;
 
-            playPauseToolStripMenuItem.Enabled = false;
+			playPauseToolStripMenuItem.Enabled = false;
             timerTime.Interval = 1000;
 
             this.KeyPreview = true; // prioritaskan input pakai keyboard?
             this.DoubleBuffered = true;  // krn banyak gambar yg berubah" (berubahnya cepet banget) jadi bisa flicker jedag jedug
                                          // gambar" disusun di sebuah buffer/memori, lalu nanti bergantian?
-
-			// Buat ghost warning indicator
-			ghostWarning = new PictureBox();
-			ghostWarning.Image = Properties.Resources.Idle;
-			ghostWarning.SizeMode = PictureBoxSizeMode.StretchImage;
-			ghostWarning.BackColor = Color.Transparent;
-			ghostWarning.Visible = false;
-			this.Controls.Add(ghostWarning);
 		}
 		#endregion
 
@@ -218,9 +212,11 @@ namespace _160425132_Felicia_FinderQuest
 		public void ResetGameTime()
 		{
 			time = new Time(0, 1, 0); // reset ke 1 menit
+
 			labelTime.Text = time.DisplayData();
 			player.PlayTime = time;
 			timerTime.Start();
+			
 			panelGame.Visible = true;
 			labelTime.Visible = true;
 			playPauseToolStripMenuItem.Enabled = true;
@@ -256,19 +252,6 @@ namespace _160425132_Felicia_FinderQuest
             playPauseToolStripMenuItem.Text = "Pause Game";
 			this.Focus();
         }
-
-		public void ResetTotal()
-		{
-			panelGame.Visible = false;
-			labelTime.Visible = false;
-			panelTalkArea.Visible = false;
-			//currentWalkArea.RemoveAllPersons();
-			this.BackgroundImage = Properties.Resources.background;
-			this.backSoundPlayer.controls.stop();
-
-			playPauseToolStripMenuItem.Enabled = false;
-			player.Reset();
-		}
         #endregion
 
         #region METHODS (Generate Area)
@@ -430,18 +413,20 @@ namespace _160425132_Felicia_FinderQuest
 			this.formA200 = frm;
 		}
 
-
 		private void FormGame_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (e.CloseReason == CloseReason.UserClosing)
+			if (tutup == false)
 			{
-				e.Cancel = true;
-				this.Hide();
-				formA200.Show();
-				formA200.bgm.controls.play();
-				backSoundPlayer.controls.pause();
-				if (otherSoundPlayer != null)
-					otherSoundPlayer.controls.pause();
+				if (e.CloseReason == CloseReason.UserClosing)
+				{
+					e.Cancel = true;
+					this.Hide();
+					formA200.Show();
+					formA200.bgm.controls.play();
+					backSoundPlayer.controls.pause();
+					if (otherSoundPlayer != null)
+						otherSoundPlayer.controls.pause();
+				}
 			}
 		}
 
@@ -452,3 +437,13 @@ namespace _160425132_Felicia_FinderQuest
 		#endregion
 	}
 }
+
+//#region Discarded Codes
+//// Buat ghost warning indicator
+//ghostWarning = new PictureBox();
+//ghostWarning.Image = Properties.Resources.Idle;
+//ghostWarning.SizeMode = PictureBoxSizeMode.StretchImage;
+//ghostWarning.BackColor = Color.Transparent;
+//ghostWarning.Visible = false;
+//this.Controls.Add(ghostWarning);
+//#endregion

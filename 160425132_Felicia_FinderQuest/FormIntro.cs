@@ -26,6 +26,7 @@ namespace _160425132_Felicia_FinderQuest
 			this.WindowState = FormWindowState.Maximized; // bikin size form sebesar layar
 			axWindowsMediaPlayer1.uiMode = "none";
 			axWindowsMediaPlayer1.Dock = DockStyle.Fill; // bikin size video sebesar layar
+			axWindowsMediaPlayer1.stretchToFit = true;
 			string videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Intro.mp4");
 
 			if (File.Exists(videoPath))
@@ -43,7 +44,6 @@ namespace _160425132_Felicia_FinderQuest
 		FormA200 f2;
 		private void BukaMainMenu()
 		{
-			MessageBox.Show("Masuk ke gamee");
 			this.Hide();
 			f2 = new FormA200();
 			f2.Show();

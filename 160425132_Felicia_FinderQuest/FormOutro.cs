@@ -26,6 +26,7 @@ namespace _160425132_Felicia_FinderQuest
 			this.WindowState = FormWindowState.Maximized; // size form sebesar layar
 			axWindowsMediaPlayer1.uiMode = "none";
 			axWindowsMediaPlayer1.Dock = DockStyle.Fill; // size video sebesar layar
+			axWindowsMediaPlayer1.stretchToFit = true;
 			string videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Outro.mp4");
 
 			if (File.Exists(videoPath))

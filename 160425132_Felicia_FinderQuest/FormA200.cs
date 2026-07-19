@@ -23,7 +23,7 @@ namespace _160425132_Felicia_FinderQuest
 		public WindowsMediaPlayer bgm = new WindowsMediaPlayer();
 		WindowsMediaPlayer napas = new WindowsMediaPlayer();
 		int timerEntity;
-		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.mp3", "\\sound\\DepanPlayer.mp3", Properties.Resources.Idle, new Size(350, 605), new Point(150, 25), Properties.Resources.Jumpscare, new Size(900, 500), new Point(0, 0));
+		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.mp3", Properties.Resources.Idle, new Size(350, 605), new Point(150, 25), Properties.Resources.Jumpscare, new Size(900, 500), new Point(0, 0));
 
 		private void FormOffice_Load(object sender, EventArgs e)
 		{
@@ -38,7 +38,10 @@ namespace _160425132_Felicia_FinderQuest
 			timerWon.Stop();
 
 			panelGameOver.SendToBack();
+			panelGameOver.Enabled = false;
 			panelGameOver.Visible = false;
+
+			this.DoubleBuffered = true;
 		}
 
 		#region TANGAN & MEKANISME BUTTON
@@ -65,22 +68,6 @@ namespace _160425132_Felicia_FinderQuest
 				napas.URL = Application.StartupPath + "\\sound\\nafas.mp3";
 				napas.settings.setMode("loop", true);
 				tanganAda = true;
-
-				// Langsung cek: kalau hantu sedang muncul, usir hantu dan reset siklus
-				if (entityPresent || entityVisible)  //buat apa
-				{
-					entity.HideEntity();
-					entity.MusicDepanPlayer.controls.stop();
-					entityPresent = false;
-					entityVisible = false;
-					timerEntity = 0;
-					this.bgm.controls.play();
-
-					// Hantu akan muncul lagi dalam 10 detik
-					timeApproaching = 3;
-					timeNearby = 1;
-					durationPresent = rnd.Next(7, 16);
-				}
 			}
 		}
 
@@ -108,9 +95,10 @@ namespace _160425132_Felicia_FinderQuest
 			bgm.controls.pause();
 			if (formGame.otherSoundPlayer != null)
 			{
-				formGame.otherSoundPlayer.controls.play();
-				if (formGame.otherSoundPlayer.playState != WMPPlayState.wmppsPlaying)
+				if (formGame.otherSoundPlayer.playState != WMPPlayState.wmppsPaused)
 					formGame.backSoundPlayer.controls.play();
+				else
+					formGame.otherSoundPlayer.controls.play();
 			}
 			else
 			{
@@ -120,60 +108,19 @@ namespace _160425132_Felicia_FinderQuest
 			formGame.KirimForm(this);
 			formGame.Show();
 			this.Hide();
-
-			// Reset interval hantu ke normal setelah masuk game
-			timerEntity = 0;
-			GenerateInterval();
-		}
-		#endregion
-
-		#region WAKTU FINDER QUEST HABIS
-		// Dipanggil saat hantu muncul dan player sedang di FormGame → paksa balik ke ruangan
-		private void ForceReturnFromGame()
-		{
-			formGame.HideGhostWarning();
-			formGame.backSoundPlayer.controls.pause();
-			if (formGame.otherSoundPlayer != null)
-				formGame.otherSoundPlayer.controls.pause();
-			formGame.Hide();
-			this.Show();
-		}
-
-		// Dipanggil dari FormGame saat waktu habis
-		public void HandleGameTimeUp()
-		{
-			// Sembunyikan FormGame, tampilkan FormA200
-			formGame.HideGhostWarning();
-			formGame.backSoundPlayer.controls.pause();
-			if (formGame.otherSoundPlayer != null)
-				formGame.otherSoundPlayer.controls.pause();
-			formGame.Hide();
-			this.Show();
-			this.bgm.controls.play();
-
-			// Disable View Monitor selama 20 detik
-			buttonViewMonitor.Enabled = false;
-			monitorCooldown = 20;
-			gameTimeUp = true;
-
-			// Hantu jadi SUPER agresif selama menunggu!
-			timerEntity = 0;
-			timeApproaching = 2;  // approaching di detik ke-2
-			timeNearby = 1;       // nearby di detik ke-3
-			durationPresent = 5;  // hantu stay 5 detik, lalu ulang lagi
 		}
 		#endregion
 
 		#region TIMER
-		int timeApproaching, timeNearby, durationPresent;
-		bool generateAgain = false, entityPresent = false, entityVisible = false;
+		int timeApproaching, timeNearby, timePresent;
+		bool generateAgain = false, entityPresent = false;
 		private void timerA200_Tick(object sender, EventArgs e)
 		{
 			timerEntity++;
 			CheckTime();
 			CheckTangan();
 
-			// Countdown monitor cooldown (setelah game over)
+			// Countdown monitor cooldown (setelah finder quest game over)
 			if (monitorCooldown > 0)
 			{
 				monitorCooldown--;
@@ -182,6 +129,9 @@ namespace _160425132_Felicia_FinderQuest
 				{
 					buttonViewMonitor.Enabled = true;
 					buttonViewMonitor.Text = "View Monitor➡";
+					timerEntity = 0;
+					generateAgain = true;
+					//entity.HideEntity();
 				}
 			}
 
@@ -211,50 +161,28 @@ namespace _160425132_Felicia_FinderQuest
 			if (timerEntity == timeApproaching) // sound 1
 			{
 				entity.PlaySound("approaching");
-				// Kalau player di FormGame, tampilkan warning kecil
-				if (!this.Visible) formGame.ShowGhostWarning("approaching");
 			}
 			else if (timerEntity == timeApproaching + timeNearby) // sound 2
 			{
 				entity.PlaySound("nearby");
-				// Kalau player di FormGame, warning lebih besar
-				if (!this.Visible) formGame.ShowGhostWarning("nearby");
 			}
-			else if (timerEntity == timeApproaching + timeNearby + 6) // entity present
+			else if (timerEntity == timeApproaching + timeNearby + timePresent) // entity present
 			{
-				// Kalau player di FormGame, paksa balik ke ruangan dulu!
-				if (!this.Visible)
-				{
-					ForceReturnFromGame();
-				}
-
 				this.bgm.controls.pause();
-				entity.PlaySound("depanPlayer");
 				entity.DisplayEntity(this);
-				entityVisible = true;
+				//entity.PlaySound("depanPlayer");
 			}
-			else if (timerEntity == timeApproaching + timeNearby + 7)
+			else if (timerEntity == timeApproaching + timeNearby + timePresent + 1)  // tunggu 1 detik supaya player bisa react
 			{
 				entityPresent = true;
-			}
-			else if(timerEntity == timeApproaching + timeNearby + 6 + durationPresent) // ngulang
-			{
-				generateAgain = true;
-				timerEntity = 0;
-				this.bgm.controls.play();
-				entity.MusicDepanPlayer.controls.stop();
-				entity.HideEntity();
-				entityPresent = false;
-				entityVisible = false;
-				formGame.HideGhostWarning(); // bersihkan warning di FormGame
 			}
 		}
 
 		private void GenerateInterval()
 		{
-			timeApproaching = rnd.Next(10, 21);
-			timeNearby = rnd.Next(15, 21);
-			durationPresent = rnd.Next(7, 16);
+			timeApproaching = rnd.Next(7, 15);
+			timeNearby = rnd.Next(13, 19);
+			timePresent = 6;
 		}
 
 		private void CheckTangan()
@@ -269,42 +197,23 @@ namespace _160425132_Felicia_FinderQuest
 				}
 				else
 				{
-					// Berhasil tutup mata → hantu hilang, muncul lagi 10 detik kemudian
-					entity.HideEntity();
-					entity.MusicDepanPlayer.controls.stop();
-					entityPresent = false;
-					entityVisible = false;
+					// Berhasil tutup mata → hantu hilang, generate waktu muncul lagi
+					if (monitorCooldown == 0)  // kalau entitas tidak sedang agresif, maka generate again
+						generateAgain = true;
 					timerEntity = 0;
 					this.bgm.controls.play();
-
-					// Set interval: hantu muncul lagi dalam 10 detik (approaching 3s, nearby 4s, muncul 10s)
-					timeApproaching = 3;
-					timeNearby = 1;
-					durationPresent = rnd.Next(7, 16);
+					entity.HideEntity();
+					entityPresent = false;
 				}
-			}
-			else if (entityVisible && tanganAda)
-			{
-				// Tutup mata saat hantu baru kelihatan sedikit → hantu hilang, muncul lagi 10 detik kemudian
-				entity.HideEntity();
-				entity.MusicDepanPlayer.controls.stop();
-				entityVisible = false;
-				timerEntity = 0;
-				this.bgm.controls.play();
-
-				// Set interval: hantu muncul lagi dalam 10 detik
-				timeApproaching = 3;
-				timeNearby = 1;
-				durationPresent = rnd.Next(7, 16);
-			}
+			}		
 		}
+		#endregion
 
-		
+		#region Game Over
 		private void timerJumpscare_Tick(object sender, EventArgs e)
 		{
 			timerJumpscare.Stop();
 
-			//formGame.ResetTotal();
 			entity.HideJumpscare();
 			generateAgain = true;
 			timerEntity = 0;
@@ -315,16 +224,20 @@ namespace _160425132_Felicia_FinderQuest
 
 		private void GameOver()
 		{
+			formGame.tutup = true;
 			formGame.Close();
 			if (formGame.form != null)
 			{
 				formGame.form.Close();
 			}
+			formGame.backSoundPlayer.controls.pause();
+			if (formGame.otherSoundPlayer != null)
+				formGame.otherSoundPlayer.controls.pause();
+			this.Show();
 			this.bgm.controls.stop();
 
-
 			entity.HideEntity();
-			entity.MusicDepanPlayer.controls.stop();
+			//entity.MusicDepanPlayer.controls.stop();
 			entity.DisplayJumpscare(this);
 			timerJumpscare.Start();
 		}
@@ -333,6 +246,8 @@ namespace _160425132_Felicia_FinderQuest
 		{
 			this.FormOffice_Load(sender, e);
 			entityPresent = false;
+			formGame.tutup = false;
+			formGame = new FormGame();
 		}
 
 		private void buttonExit_Click(object sender, EventArgs e)
@@ -341,5 +256,43 @@ namespace _160425132_Felicia_FinderQuest
 		}
 		#endregion
 
+		#region WAKTU FINDER QUEST HABIS
+		// Dipanggil dari FormGame saat waktu habis
+		public void HandleGameTimeUp()
+		{
+			// Sembunyikan FormGame, tampilkan FormA200
+			formGame.backSoundPlayer.controls.pause();
+			if (formGame.otherSoundPlayer != null)
+				formGame.otherSoundPlayer.controls.stop();
+			formGame.Hide();
+			this.Show();
+			this.bgm.controls.play();
+
+			// Disable View Monitor selama 15 detik
+			buttonViewMonitor.Enabled = false;
+			monitorCooldown = 15;
+			gameTimeUp = true;
+
+			// Hantu jadi SUPER agresif selama menunggu!
+			timerEntity = 0;
+			timeApproaching = 2;  // approaching di detik ke-2
+			timeNearby = 1;       // nearby di detik ke-3
+			timePresent = 4;      // tampil di detik ke-7
+		}
+		#endregion
+
 	}
-}			
+}
+
+
+//#region Discarded codes
+//// Dipanggil saat hantu muncul dan player sedang di FormGame → paksa balik ke ruangan
+////private void ForceReturnFromGame()
+////{
+////	formGame.backSoundPlayer.controls.pause();
+////	if (formGame.otherSoundPlayer != null)
+////		formGame.otherSoundPlayer.controls.pause();
+////	formGame.Hide();
+////	this.Show();
+////}
+//#endregion
