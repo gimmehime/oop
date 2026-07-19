@@ -67,7 +67,7 @@ namespace _160425132_Felicia_FinderQuest
 				tanganAda = true;
 
 				// Langsung cek: kalau hantu sedang muncul, usir hantu dan reset siklus
-				if (entityPresent || entityVisible)
+				if (entityPresent || entityVisible)  //buat apa
 				{
 					entity.HideEntity();
 					entity.MusicDepanPlayer.controls.stop();
@@ -127,6 +127,7 @@ namespace _160425132_Felicia_FinderQuest
 		}
 		#endregion
 
+		#region WAKTU FINDER QUEST HABIS
 		// Dipanggil saat hantu muncul dan player sedang di FormGame → paksa balik ke ruangan
 		private void ForceReturnFromGame()
 		{
@@ -161,7 +162,7 @@ namespace _160425132_Felicia_FinderQuest
 			timeNearby = 1;       // nearby di detik ke-3
 			durationPresent = 5;  // hantu stay 5 detik, lalu ulang lagi
 		}
-
+		#endregion
 
 		#region TIMER
 		int timeApproaching, timeNearby, durationPresent;
@@ -337,29 +338,8 @@ namespace _160425132_Felicia_FinderQuest
 		private void buttonExit_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
-			//this.Close();
 		}
 		#endregion
 
 	}
-}
-
-// pas jumpscare, form question n game di hide and paused, pas retry, form game juga retry
-// klo wake up again, entity idle nya send to front for some reason
-// 1118, 610
-
-//FormQuestion formQuestion = new FormQuestion();
-//public string currentForm;
-
-//if (currentForm == null || currentForm == "game")
-//{
-
-//}
-////else if (currentForm == "question")
-//{
-//	formQuestion.KirimForm(this);
-//	formQuestion.changeForm = false;
-//	formQuestion.Show();
-//	this.Hide();
-//}
-// what will happen to formgame klo tutup form question after pindah ke ruangan n balik lagi			
+}			

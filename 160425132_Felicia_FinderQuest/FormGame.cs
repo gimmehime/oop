@@ -430,51 +430,20 @@ namespace _160425132_Felicia_FinderQuest
 			this.formA200 = frm;
 		}
 
+
 		private void FormGame_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (e.CloseReason == CloseReason.UserClosing)
 			{
 				e.Cancel = true;
 				this.Hide();
-				HideGhostWarning(); // bersihkan warning saat balik
 				formA200.Show();
 				formA200.bgm.controls.play();
 				backSoundPlayer.controls.pause();
 				if (otherSoundPlayer != null)
 					otherSoundPlayer.controls.pause();
-				//formA200.currentForm = "game";
 			}
 		}
-
-		#region GHOST WARNING
-		// Tampilkan gambar hantu sebagai peringatan di layar game
-		public void ShowGhostWarning(string level)
-		{
-			if (ghostWarning == null) return;
-			ghostWarning.Visible = true;
-
-			if (level == "approaching")
-			{
-				// Hantu kecil di pojok kanan bawah
-				ghostWarning.Size = new Size(50, 86);
-				ghostWarning.Location = new Point(this.ClientSize.Width - 70, this.ClientSize.Height - 110);
-			}
-			else if (level == "nearby")
-			{
-				// Hantu lebih besar, sudah dekat!
-				ghostWarning.Size = new Size(120, 207);
-				ghostWarning.Location = new Point(this.ClientSize.Width - 140, this.ClientSize.Height - 230);
-			}
-			ghostWarning.BringToFront();
-		}
-
-		// Sembunyikan warning hantu
-		public void HideGhostWarning()
-		{
-			if (ghostWarning != null)
-				ghostWarning.Visible = false;
-		}
-		#endregion
 
 		private void labelBackToRoom_Click(object sender, EventArgs e)
 		{
@@ -483,5 +452,3 @@ namespace _160425132_Felicia_FinderQuest
 		#endregion
 	}
 }
-
-// multiline di textbox di enabled spy bisa di tinggiin, autosize dimatiin di label spy bisa ganti size
