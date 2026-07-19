@@ -26,7 +26,7 @@ namespace _160425132_Felicia_FinderQuest
 			this.WindowState = FormWindowState.Maximized; // bikin size form sebesar layar
 			axWindowsMediaPlayer1.uiMode = "none";
 			axWindowsMediaPlayer1.Dock = DockStyle.Fill; // bikin size video sebesar layar
-			string videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vid1.mp4");
+			string videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Intro.mp4");
 
 			if (File.Exists(videoPath))
 			{
