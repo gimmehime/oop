@@ -23,7 +23,7 @@ namespace _160425132_Felicia_FinderQuest
 		public WindowsMediaPlayer bgm = new WindowsMediaPlayer();
 		WindowsMediaPlayer napas = new WindowsMediaPlayer();
 		int timerEntity;
-		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.mp3", Properties.Resources.Idle, new Size(350, 605), new Point(150, 25), Properties.Resources.Jumpscare, new Size(900, 500), new Point(0, 0));
+		Entity entity = new Entity("\\sound\\ApproachingAudio.wav", "\\sound\\NearbyAudio.wav", "\\sound\\JumpscareAudio.mp3", "\\sound\\DepanPlayer.mp3", Properties.Resources.Idle, new Size(350, 605), new Point(150, 25), Properties.Resources.Jumpscare, new Size(900, 500), new Point(0, 0));
 
 		private void FormOffice_Load(object sender, EventArgs e)
 		{
@@ -36,12 +36,14 @@ namespace _160425132_Felicia_FinderQuest
 			timerA200.Start();
 			timerJumpscare.Stop();
 			timerWon.Stop();
+			timerKetTimesUp.Stop();
 
 			panelGameOver.SendToBack();
 			panelGameOver.Enabled = false;
 			panelGameOver.Visible = false;
 
 			this.DoubleBuffered = true;
+		
 		}
 
 		#region TANGAN & MEKANISME BUTTON
@@ -81,7 +83,7 @@ namespace _160425132_Felicia_FinderQuest
 		#region GANTI FORM
 		FormGame formGame = new FormGame();
 		int monitorCooldown = 0; // countdown sebelum View Monitor bisa diklik lagi
-		bool gameTimeUp = false; // apakah game over karena waktu habis
+		bool gameTimeUp = false; // apakah Finder Quest game over karena waktu habis
 		private void buttonViewMonitor_Click(object sender, EventArgs e)
 		{
 			// Kalau baru balik dari game over, reset waktu game dulu
@@ -137,13 +139,13 @@ namespace _160425132_Felicia_FinderQuest
 
 			if (formGame.won)
 			{
+				timerA200.Stop();
 				timerWon.Start();
 			}
 		}
 		private void timerWon_Tick(object sender, EventArgs e)
 		{
 			timerWon.Stop();
-			timerA200.Stop();
 			formGame.Close();
 			this.bgm.controls.stop();
 			FormOutro form = new FormOutro();
@@ -170,7 +172,7 @@ namespace _160425132_Felicia_FinderQuest
 			{
 				this.bgm.controls.pause();
 				entity.DisplayEntity(this);
-				//entity.PlaySound("depanPlayer");
+				entity.PlaySound("depanPlayer");
 			}
 			else if (timerEntity == timeApproaching + timeNearby + timePresent + 1)  // tunggu 1 detik supaya player bisa react
 			{
@@ -205,11 +207,11 @@ namespace _160425132_Felicia_FinderQuest
 					entity.HideEntity();
 					entityPresent = false;
 				}
-			}		
+			}
 		}
 		#endregion
 
-		#region Game Over
+		#region GAME OVER
 		private void timerJumpscare_Tick(object sender, EventArgs e)
 		{
 			timerJumpscare.Stop();
@@ -237,7 +239,7 @@ namespace _160425132_Felicia_FinderQuest
 			this.bgm.controls.stop();
 
 			entity.HideEntity();
-			//entity.MusicDepanPlayer.controls.stop();
+			entity.MusicDepanPlayer.controls.stop();
 			entity.DisplayJumpscare(this);
 			timerJumpscare.Start();
 		}
@@ -277,10 +279,24 @@ namespace _160425132_Felicia_FinderQuest
 			timerEntity = 0;
 			timeApproaching = 2;  // approaching di detik ke-2
 			timeNearby = 1;       // nearby di detik ke-3
-			timePresent = 4;      // tampil di detik ke-7
+			timePresent = 3;      // tampil di detik ke-6
+
+			labelKetTimesUp.Visible = true;
+			timerKetTimesUp.Start();
+		}
+
+		private void timerKetTimesUp_Tick(object sender, EventArgs e)
+		{
+			timerKetTimesUp.Stop();
+			labelKetTimesUp.Visible = false;
 		}
 		#endregion
 
+		public FormIntro frmIntro = new FormIntro();
+		private void FormA200_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			frmIntro.Close();
+		}
 	}
 }
 

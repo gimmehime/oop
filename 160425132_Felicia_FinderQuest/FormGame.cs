@@ -45,7 +45,7 @@ namespace _160425132_Felicia_FinderQuest
 
         private void FormGame_Load(object sender, EventArgs e)
         {
-			time = new Time(0, 0, 15);
+			time = new Time(0, 1, 0);
 			player = new Players("John", Properties.Resources.player_right, new Size(50, 80), new Point(10, 400), time);
 			panelGame.Visible = false;
             labelTime.Visible = false;
@@ -261,9 +261,9 @@ namespace _160425132_Felicia_FinderQuest
 			{
 				currentWalkArea = new WalkAreas("The Barn", Properties.Resources.walkArea1, 1);
 
-				currentWalkArea.AddPerson(1, "Anna", Properties.Resources.person1, new Size(60, 90), new Point(150, 380), "I have a question for you. Are you ready?\nPress 'y' to continue");
-				currentWalkArea.AddPerson(2, "Andy", Properties.Resources.person2, new Size(60, 90), new Point(420, 380), "Can you answer my question? Let's go!\nPress 'y' to continue");
-				currentWalkArea.AddPerson(3, "Bobby", Properties.Resources.person3, new Size(60, 90), new Point(600, 380), "Just answer my question please..\nPress 'y' to continue");
+				currentWalkArea.AddPerson(1, "Anna", Properties.Resources.person1, new Size(60, 90), new Point(150, 390), "I have a question for you. Are you ready?\nPress 'y' to continue");
+				currentWalkArea.AddPerson(2, "Andy", Properties.Resources.person2, new Size(60, 90), new Point(420, 397), "Can you answer my question? Let's go!\nPress 'y' to continue");
+				currentWalkArea.AddPerson(3, "Bobby", Properties.Resources.person3, new Size(60, 90), new Point(600, 395), "Just answer my question please..\nPress 'y' to continue");
 			}
 			else if (currentWalkArea.NoArea == 2)
 			{
@@ -271,16 +271,16 @@ namespace _160425132_Felicia_FinderQuest
 				currentWalkArea.RemoveAllPersons();
 				currentWalkArea = new WalkAreas("The Field", Properties.Resources.walkArea2, 2);
 
-				currentWalkArea.AddPerson(4, "Rina", Properties.Resources.person4, new Size(60, 90), new Point(100, 380), "I'm sure you can answer my question\nPress 'y' to continue");
-				currentWalkArea.AddPerson(5, "Tommy", Properties.Resources.person5, new Size(60, 90), new Point(450, 380), "You look so smart. Can you answer this?\nPress 'y' to continue");
+				currentWalkArea.AddPerson(4, "Rina", Properties.Resources.person4, new Size(60, 90), new Point(100, 382), "I'm sure you can answer my question\nPress 'y' to continue");
+				currentWalkArea.AddPerson(5, "Tommy", Properties.Resources.person5, new Size(60, 90), new Point(450, 395), "You look so smart. Can you answer this?\nPress 'y' to continue");
 			}
 			else if (currentWalkArea.NoArea == 3)
 			{
 				currentWalkArea.RemoveAllPersons();
 				currentWalkArea = new WalkAreas("The Farm", Properties.Resources.walkArea3, 3);
 
-				currentWalkArea.AddPerson(6, "Marie", Properties.Resources.person6, new Size(60, 90), new Point(120, 380), "Answer my question carefully.. \nPress 'y' to continue");
-				currentWalkArea.AddPerson(7, "Luke", Properties.Resources.person7, new Size(60, 90), new Point(470, 380), "I have a question for you.\nPress 'y' to continue");
+				currentWalkArea.AddPerson(6, "Marie", Properties.Resources.person6, new Size(60, 90), new Point(120, 402), "Answer my question carefully.. \nPress 'y' to continue");
+				currentWalkArea.AddPerson(7, "Luke", Properties.Resources.person7, new Size(60, 90), new Point(470, 402), "I have a question for you.\nPress 'y' to continue");
 			}
 
 			currentWalkArea.DisplayPicture(this); // tampilin gambar walk area

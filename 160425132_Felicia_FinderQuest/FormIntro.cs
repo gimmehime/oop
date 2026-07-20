@@ -44,9 +44,14 @@ namespace _160425132_Felicia_FinderQuest
 		FormA200 f2;
 		private void BukaMainMenu()
 		{
+			axWindowsMediaPlayer1.Ctlcontrols.stop();
+			axWindowsMediaPlayer1.close();
+
 			this.Hide();
 			f2 = new FormA200();
 			f2.Show();
+
+			f2.frmIntro = this;
 		}
 
 		private void axWindowsMediaPlayer1_PlayStateChange(object sender, _WMPOCXEvents_PlayStateChangeEvent e)
